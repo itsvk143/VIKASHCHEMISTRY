@@ -16,7 +16,7 @@ const mainTabs = [
   "TEST PAPERS",
 
   "MOLE CONCEPT",
-  "ISMOREISM",
+  "ISOMERISM",
   "PERIODIC TABLES",
 
   "STRUCTURE OF ATOM",
@@ -260,7 +260,7 @@ const pdfData = {
 };
 
 const NEET = () => {
-  const [activeMainTab, setActiveMainTab] = useState(null);
+ const [activeMainTab, setActiveMainTab] = useState(null);
     const [selectedPdf, setSelectedPdf] = useState(null);
     const [numPages, setNumPages] = useState(null);
     const [visiblePages, setVisiblePages] = useState(1);
@@ -294,7 +294,7 @@ const NEET = () => {
                   <ScrollArea className="h-[400px]">
                     {Object.keys(importantBooks).map((category) => (
                       <div key={category} className="mb-4">
-                        <h4 className="text-xl font-semibold mb-2">{category}</h4>
+                        <h4 className=" text-xl font-semibold mb-2">{category}</h4>
                         {importantBooks[category].map((book, id) => (
                           <li key={id} className="bg-gray-800 py-4 px-6 rounded-xl text-center cursor-pointer">
                             <div className="flex justify-between items-center">
@@ -339,5 +339,4 @@ const NEET = () => {
       </motion.div>
     );
   };
-
 export default NEET;

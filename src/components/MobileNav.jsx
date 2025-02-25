@@ -10,7 +10,7 @@ const links = [
     name: "home",
     path: "/",
   },
-
+  
   {
     name: "JEE_ADVANCE",
     path: "/JEE_ADVANCE",
