@@ -64,13 +64,30 @@ const mainTabs = [
 
 const importantBooks = {
   Physical: [
-    { name: "NCERT Physical Chemistry", link: "https://drive.google.com/file/d/1/preview", downloadLink: "https://drive.google.com/uc?export=download&id=1" },
+    { name: "Advance Problem in Physical by N Avasthi ", link: "https://drive.google.com/file/d/1ZLB5A542Ow8SqWAkUSJDpcmUpM8eL6mj/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1ZLB5A542Ow8SqWAkUSJDpcmUpM8eL6mj/view?usp=drive_link" },
+    { name: "Cengage Book Part 1", link: "https://drive.google.com/drive/folders/1Ra_4YLp2JAriZbNI2tH5Cjpvk3hxEDBE?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1Ra_4YLp2JAriZbNI2tH5Cjpvk3hxEDBE?usp=drive_link" },
+    { name: "Cengage Book Part 2", link: "https://drive.google.com/drive/folders/1wgHvFylGTRjx7xn6JjK2ieUKCvYSi4Fw?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1wgHvFylGTRjx7xn6JjK2ieUKCvYSi4Fw?usp=drive_link" },
+    { name: "GRB O P Tondon ", link: "https://drive.google.com/file/d/19wN71LUnzeIcl-F2EGAo9mN-MAY-ZFU2/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/19wN71LUnzeIcl-F2EGAo9mN-MAY-ZFU2/view?usp=drive_link" },
   ],
   Organic: [
-    { name: "Organic Chemistry by Morrison Boyd", link: "https://drive.google.com/file/d/2/preview", downloadLink: "https://drive.google.com/uc?export=download&id=2" },
+    { name: "Organic Chemistry by J. Clayden ", link: "https://drive.google.com/file/d/1koGvwreMkH76G1Xgoh5Owx4vAMiav7bg/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1koGvwreMkH76G1Xgoh5Owx4vAMiav7bg/view?usp=drive_link" },
+    { name: "Advance Problem in Organic Chemistry by M S Chouhan  ", link: "https://drive.google.com/file/d/1uxkiOxQy--1IMZWUfS0AJTaZPgwO8SAP/view?usp=drive_link", downloadLink: "https://od.lk/d/MzJfNDAzNzEyMjNf/Advanced%20Problems%20in%20Organic%20Chemistry%20-%20M%20S%20Chauhan.pdf" },
+    { name: "Advance Problem in Organic Chemistry by Himanshu pandey ", link: "https://drive.google.com/file/d/1zTW2QF6P5KqbxyYHeOV_Zj0WrN2-G_3W/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1zTW2QF6P5KqbxyYHeOV_Zj0WrN2-G_3W/view?usp=drive_link" },
+    { name: "Advance Problem in Organic Chemistry by Akshay Chaudhary", link: "https://drive.google.com/file/d/1RIBaJK8IVNufyPDAAIlAW60m4xi7tz_L/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1RIBaJK8IVNufyPDAAIlAW60m4xi7tz_L/view?usp=drive_link" },
+    { name: "Cengage Book Part 1", link: "https://drive.google.com/drive/folders/1I2c8kDN8XYSp0P_rVCk3JnuZxwgx1SYb?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1I2c8kDN8XYSp0P_rVCk3JnuZxwgx1SYb?usp=drive_link" },
+    { name: "Cengage Book Part 2", link: "https://drive.google.com/drive/folders/1pNqLQiH-9YLTL-n9twRYCWOhnfvQQAFY?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1pNqLQiH-9YLTL-n9twRYCWOhnfvQQAFY?usp=drive_link" },
+    { name: "Peter Sykes", link: "https://drive.google.com/file/d/1VEdNuiUpyAGEiRhKoKQQnvthnUTAYrQH/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1VEdNuiUpyAGEiRhKoKQQnvthnUTAYrQH/view?usp=drive_link" },
+  
   ],
   Inorganic: [
-    { name: "Concise Inorganic Chemistry by J.D. Lee", link: "https://drive.google.com/file/d/3/preview", downloadLink: "https://drive.google.com/uc?export=download&id=3" },
+    { name: "Concise Inorganic Chemistry by J.D. Lee", link: "https://drive.google.com/file/d/132k2vCUNwDrqr3W71W0w9kX--S0uavnZ/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/132k2vCUNwDrqr3W71W0w9kX--S0uavnZ/view?usp=drive_link" },
+    { name: "Cengage Book Part 1", link: "https://drive.google.com/drive/folders/18Qf5IPw2eOeyCyZ1r4G05woEjsDkjtNy?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/18Qf5IPw2eOeyCyZ1r4G05woEjsDkjtNy?usp=drive_link" },
+    { name: "Cengage Book Part 2", link: "https://drive.google.com/drive/folders/1QHwf72cbOwCsEF1AG_ZwlS_DBIpkp_zs?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1QHwf72cbOwCsEF1AG_ZwlS_DBIpkp_zs?usp=drive_link" },
+    { name: "V Joshi Part 1", link: " https://drive.google.com/file/d/1z5NQlVTNXyFHaY3XPUXGITSx4x50oUeg/view?usp=drive_link", downloadLink: " https://drive.google.com/file/d/1z5NQlVTNXyFHaY3XPUXGITSx4x50oUeg/view?usp=drive_link" },
+    { name: "V Joshi Part 2", link: " https://drive.google.com/file/d/1QyQ5wsqYX87nXGtnptkuTSsKly5yd8BG/view?usp=drive_link", downloadLink: " https://drive.google.com/file/d/1QyQ5wsqYX87nXGtnptkuTSsKly5yd8BG/view?usp=drive_link" },
+    { name: "V K Jaishwal Part 1", link: "https://drive.google.com/file/d/1cPTwUSMuya8aYKm0ILGbDs2msalZB6dU/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1cPTwUSMuya8aYKm0ILGbDs2msalZB6dU/view?usp=drive_link" },
+    { name: "V K Jaishwal Part 2", link: " https://drive.google.com/file/d/1XGUcsbDu7nWgaRhzkTQOCn0U7eQVcPgG/view?usp=drive_link", downloadLink: " https://drive.google.com/file/d/1XGUcsbDu7nWgaRhzkTQOCn0U7eQVcPgG/view?usp=drive_link" },
+   
   ],
 };
 
@@ -80,25 +97,35 @@ const pdfData = {
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
+    { name: "DPP1", link: "https://drive.google.com/file/d/1YSZkSN2t--LoTdTudV8WISh513iGwMhX/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1YSZkSN2t--LoTdTudV8WISh513iGwMhX/view?usp=drive_link" },
+    { name: "DPP2", link: "https://drive.google.com/file/d/1RxZWsgMkmtnAns1wZP8rHBZRmRWKKn-U/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1RxZWsgMkmtnAns1wZP8rHBZRmRWKKn-U/view?usp=drive_link" },
   ],
   "STRUCTURE OF ATOM": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
-    { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
+    { name: "Printed Notes", link: "https://drive.google.com/file/d/1aOuA0Y3M0-Mqc0WBSdVidL8v0UDjmSe2/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1aOuA0Y3M0-Mqc0WBSdVidL8v0UDjmSe2/view?usp=drive_link" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
+    { name: "DPP1", link: "https://drive.google.com/file/d/1AYkla6sZ50i4HM5S7qXytAzMrHxX8eSX/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1AYkla6sZ50i4HM5S7qXytAzMrHxX8eSX/view?usp=drive_link" },
+    { name: "DPP2", link: "https://drive.google.com/file/d/1hn0ynj4pB8b_V_Ac3MBs5RPW7iXJZ18s/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1hn0ynj4pB8b_V_Ac3MBs5RPW7iXJZ18s/view?usp=drive_link" },
   ],
   "PERIODIC TABLES": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
-    { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
+    { name: "Printed Notes", link: "https://drive.google.com/file/d/1_oMvrZjnAUeDcpMCbdq5iE3OHBGrzVnT/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1_oMvrZjnAUeDcpMCbdq5iE3OHBGrzVnT/view?usp=drive_link" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
-  ],
+    { name: "DPP1", link: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link" },
+    { name: "DPP2", link: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link" },
+ ],
   "CHEMICAL BONDING AND MOLECULAR STRUCTURE": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
-    { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
+    { name: "Printed Notes", link: "https://drive.google.com/file/d/1cPg9Nxu82-iFZZQlq_6MnCk0wxjRL-8d/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1cPg9Nxu82-iFZZQlq_6MnCk0wxjRL-8d/view?usp=drive_link" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
-  ],
+    { name: "DPP1", link: "https://drive.google.com/file/d/1zd2OyKTbB6vfoYH69h_FcsECjdfXwNfl/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1zd2OyKTbB6vfoYH69h_FcsECjdfXwNfl/view?usp=drive_link" },
+    { name: "DPP2", link: "https://drive.google.com/file/d/1FnpR8SGOGvsnCdnzfmyTJVoPpvehMWj4/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1FnpR8SGOGvsnCdnzfmyTJVoPpvehMWj4/view?usp=drive_link" },
+    { name: "DPP3", link: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link" },
+    { name: "DPP4", link: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link" },
+ ],
   "THERMODYNAMICS": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
