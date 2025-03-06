@@ -25,3 +25,4 @@ out/
 .gitignorenode_modules/
 .DS_Store
 .next/
+.next/
