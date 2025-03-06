@@ -115,15 +115,15 @@ const pdfData = {
     { name: "DPP1", link: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link" },
     { name: "DPP2", link: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link" },
  ],
-  "CHEMICAL BONDING AND MOLECULAR STRUCTURE": [
+  "CHEMICAL BONDING": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/1cPg9Nxu82-iFZZQlq_6MnCk0wxjRL-8d/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1cPg9Nxu82-iFZZQlq_6MnCk0wxjRL-8d/view?usp=drive_link" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
-    { name: "DPP1", link: "https://drive.google.com/file/d/1zd2OyKTbB6vfoYH69h_FcsECjdfXwNfl/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1zd2OyKTbB6vfoYH69h_FcsECjdfXwNfl/view?usp=drive_link" },
-    { name: "DPP2", link: "https://drive.google.com/file/d/1FnpR8SGOGvsnCdnzfmyTJVoPpvehMWj4/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1FnpR8SGOGvsnCdnzfmyTJVoPpvehMWj4/view?usp=drive_link" },
-    { name: "DPP3", link: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link" },
-    { name: "DPP4", link: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link" },
+    { name: "DPP1 Chemical Bonding", link: "https://drive.google.com/file/d/1zd2OyKTbB6vfoYH69h_FcsECjdfXwNfl/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1zd2OyKTbB6vfoYH69h_FcsECjdfXwNfl/view?usp=drive_link" },
+    { name: "DPP2 Chemical Bonding", link: "https://drive.google.com/file/d/1FnpR8SGOGvsnCdnzfmyTJVoPpvehMWj4/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1FnpR8SGOGvsnCdnzfmyTJVoPpvehMWj4/view?usp=drive_link" },
+    { name: "DPP3 Chemical Bonding", link: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link" },
+    { name: "DPP4 Chemical Bonding", link: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link" },
  ],
   "THERMODYNAMICS": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
@@ -309,7 +309,7 @@ const NEET = () => {
       <div className="container mx-auto">
         <Tabs className="flex flex-col xl:flex-row gap-[40px] ">
           {!activeMainTab && (
-            <TabsList className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 w-full ">
+           <TabsList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
               {mainTabs.map((mainTab) => (
                 <TabsTrigger
                   key={mainTab}

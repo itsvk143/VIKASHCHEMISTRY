@@ -124,7 +124,7 @@ const pdfData = {
     { name: "DPP1", link: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link" },
     { name: "DPP2", link: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link" },
  ],
-  "CHEMICAL BONDING AND MOLECULAR STRUCTURE": [
+  "CHEMICAL BONDING": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/1cPg9Nxu82-iFZZQlq_6MnCk0wxjRL-8d/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1cPg9Nxu82-iFZZQlq_6MnCk0wxjRL-8d/view?usp=drive_link" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
@@ -370,9 +370,9 @@ const JEE_ADVANCE = () => {
       className="min-h-[80vh] flex items-center justify-center py-12"
     >
       <div className="container mx-auto">
-        <Tabs className="flex flex-col xl:flex-row gap-[40px] ">
+        <Tabs className="flex flex-col xl:flex-row gap-[40px]">
           {!activeMainTab && (
-            <TabsList className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 w-full ">
+            <TabsList className="grid w-full gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {mainTabs.map((mainTab) => (
                 <TabsTrigger
                   key={mainTab}
@@ -402,7 +402,7 @@ const JEE_ADVANCE = () => {
                       {importantBooks[category].map((book, id) => (
                         <li
                           key={id}
-                          className="bg-gray-800 py-2 px-6 rounded-xl text-center cursor-pointer mb-4" // Reduced py-4 to py-2 to reduce padding
+                          className="bg-gray-800 py-2 px-3 rounded-xl text-center cursor-pointer mb-4" // Reduced py-4 to py-2 to reduce padding
                         >
                           <div className="flex justify-between items-center">
                             <a

@@ -22,7 +22,7 @@ const Home = () => {
            </p>
 
             {/* Exam Buttons */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid w-full gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               <a href="/JEE_ADVANCE">
                 <Button variant="outline" size="lg">JEE Advance</Button>
               </a>

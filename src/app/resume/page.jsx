@@ -1,27 +1,11 @@
 "use client";
-
-import {
-  FaHtml5,
-  FaCss3,
-  FaReact,
-  FaJs,
-  FaFigma,
-  FaNodeJs,
-} from "react-icons/fa";
-import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
-
 import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import Photo1 from "@/components/Photo1";
 import { FiDownload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 
 
@@ -119,18 +103,172 @@ const education = {
   ],
 };
 
-const skills = {
-  title: "Results",
-  description:
-    " ",
-  skillList: [
-    // {
-    //   icon: <FaHtml5 />,
-    //   name: "html5",
-    // },
+const students = [
+  {
+    name: "Divyanshu S Sahu",
+    rank: 99.77,
+    department: "JEE MAINS",
+    photo: "assets/photo.png",
+    year: 2024,
+
+  },
+  {
+    name: "Jyotiraditya Parida",
+    rank: 99.22,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+
+  },
+  {
+    name: "",
+    rank: 0,
+    department: "",
+    photo: "",
+    year: 0,
+  },
+  {
+    name: "Sayan Rath",
+    rank: 99.16,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+
+  },
+  {
+    name: "Pratik Choudhary",
+    rank: 98.97,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+
+  },
+  {
+    name: "Amol Katiyar",
+    rank: 98.43,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+
+  },
+  {
+    name: "Aditya Dash",
+    rank: 97.99,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+
+  },
+  {
+    name: "Aayam Panigarahi",
+    rank: 97.83,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+
+  },
+  {
+    name: "Aditya A Mohanta",
+    rank: 97.56,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
     
-  ],
+  },
+  {
+    name: "Suryans Dash",
+    rank: 97.16,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+    
+  },  {
+    name: "Subhrajit Giri",
+    rank: 97.04,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+    
+  },  {
+    name: "Aditya A Mohanta",
+    rank: 97.56,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+    
+  },  {
+    name: "Aditya A Mohanta",
+    rank: 97.56,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+    
+  },  {
+    name: "Aditya A Mohanta",
+    rank: 97.56,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+    
+  },  {
+    name: "Aditya A Mohanta",
+    rank: 97.56,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+    
+  },  {
+    name: "Aditya A Mohanta",
+    rank: 97.56,
+    department: "JEE MAINS",
+    photo: "https://via.placeholder.com/150",
+    year: 2024,
+    
+  },
+];
+
+const StudentCard = ({ student }) => {
+  return (
+    <motion.div whileHover={{ scale: 1.25 }} className="p-4">
+      <Card className="rounded-xl shadow-lg bg-black p-2 text-center">
+        <img
+          src={student.photo}
+          alt={student.name}
+          className="w-24 h-24 mx-auto rounded-full border-gray-200"
+        />
+        <CardContent>
+          <h2 className="text-xl font-semibold mt-2">{student.name}</h2>
+          <p className="text-white"> {student.rank}</p>
+          <p className="text-gray-500"> {student.department}</p>
+          <p className="text-gray-700"> {student.year}</p>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
 };
+
+const StudentResults = () => {
+  return (
+    <div className="flex flex-wrap justify-center gap-6 p-6">
+      {students.map((student, index) => (
+        <StudentCard key={index} student={student} />
+      ))}
+    </div>
+  );
+};
+
+const Gallery = () => {
+  const images = Array.from({ length: 25 }, (_, index) => `/assets/gallery/photo${index + 1}.jpg`);
+  return (
+    <div className="grid grid-cols-5 gap-4 p-6">
+      {images.map((src, index) => (
+        <img key={index} src={src} alt={`Gallery ${index + 1}`} className="w-full h-32 object-cover rounded-lg" />
+      ))}
+    </div>
+  );
+};
+
+
 
 const Resume = () => {
   return (
@@ -153,8 +291,9 @@ const Resume = () => {
             <TabsTrigger value="experience">Experience</TabsTrigger>
             <TabsTrigger value="education">Education</TabsTrigger>
             <TabsTrigger value="about">About me</TabsTrigger>
-            <TabsTrigger value="skills">Results</TabsTrigger>
-            
+            <TabsTrigger value="results">Results</TabsTrigger>
+            <TabsTrigger value="Gallery">Gallery</TabsTrigger>
+
             <div className="flex flex-col xl:flex-row items-center">
               <a href="/assets/VikashKumarResume.pdf" download="Vikash_Kumar_Resume.pdf">
                 <Button variant="outline" size="lg" className="uppercase flex items-center gap-10">
@@ -230,34 +369,11 @@ const Resume = () => {
                 </ScrollArea>
               </div>
             </TabsContent>
-            <TabsContent value="skills" className="w-full h-full">
-              <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-4xl font-bold">{skills.title}</h3>
-                <p className="max-w-[600px] text-white/60 mx-auto xl-mx-0">
-                  {skills.description}
-                </p>
-              </div>
-              <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:gap-[30px] ">
-                {skills.skillList.map((skill, index) => {
-                  return (
-                    <li key={index}>
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
-                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
-                              {skill.icon}
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p className="capitalize">{skill.name}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </li>
-                  );
-                })}
-              </ul>
+            <TabsContent value="results" className="w-full">
+              <h3 className="text-4xl font-bold">Results</h3>
+              <StudentResults />
             </TabsContent>
+
             <TabsContent
               value="about"
               className="w-full text-center xl:text-left"
@@ -282,6 +398,11 @@ const Resume = () => {
                 </ul>
               </div>
             </TabsContent>
+            <TabsContent value="Galary" className="w-full">
+              <h3 className="text-4xl font-bold">Gallery</h3>
+              <Gallery />
+            </TabsContent>
+
           </div>
         </Tabs>
       </div>
