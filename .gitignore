@@ -24,3 +24,4 @@ out/
 # Git-related
 .gitignorenode_modules/
 .DS_Store
+.next/
