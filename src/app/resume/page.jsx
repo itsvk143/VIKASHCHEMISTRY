@@ -108,7 +108,7 @@ const students = [
     name: "Divyanshu S Sahu",
     rank: 99.77,
     department: "JEE MAINS",
-    photo: "assets/photo.png",
+    photo: "",
     year: 2024,
 
   },
