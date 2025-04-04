@@ -119,14 +119,7 @@ const students = [
     photo: "https://via.placeholder.com/150",
     year: 2024,
 
-  },
-  {
-    name: "",
-    rank: 0,
-    department: "",
-    photo: "",
-    year: 0,
-  },
+  }, 
   {
     name: "Sayan Rath",
     rank: 99.16,
@@ -249,7 +242,7 @@ const StudentCard = ({ student }) => {
 
 const StudentResults = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-6 p-6">
+    <div className="flex flex-wrap justify-center gap-20 p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20 p-6">
       {students.map((student, index) => (
         <StudentCard key={index} student={student} />
       ))}
@@ -258,15 +251,44 @@ const StudentResults = () => {
 };
 
 const Gallery = () => {
-  const images = Array.from({ length: 25 }, (_, index) => `/assets/gallery/photo${index + 1}.jpg`);
+  const images = [
+    "/assets/gallery/photo1.jpg",
+    "/assets/gallery/photo2.jpg",,
+    "/assets/gallery/photo3.jpg",
+    "/assets/gallery/photo4.jpg",
+    "/assets/gallery/photo5.jpg",
+    "/assets/gallery/photo6.jpg",
+    "/assets/gallery/photo1.png",
+    "/assets/gallery/photo1.png",
+    "/assets/gallery/photo1.png",
+    "/assets/gallery/photo1.png",
+  ];
+
+  const handleImageClick = (src) => {
+    window.open(src, '_blank');
+  };
+
   return (
-    <div className="grid grid-cols-5 gap-4 p-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-10 p-6">
       {images.map((src, index) => (
-        <img key={index} src={src} alt={`Gallery ${index + 1}`} className="w-full h-32 object-cover rounded-lg" />
+        <motion.div
+          key={index}
+          whileHover={{ scale: 1.5 }}  // Zoom effect on hover
+          transition={{ type: 'spring', stiffness: 300 }}
+          className="relative"
+        >
+          <img
+            src={src}
+            alt={`Gallery ${index + 1}`}
+            className="w-full h-72 object-cover rounded-lg cursor-pointer"
+            onClick={() => handleImageClick(src)} // Open in new tab on click
+          />
+        </motion.div>
       ))}
     </div>
   );
 };
+
 
 
 
@@ -337,6 +359,9 @@ const Resume = () => {
                   </ul>
                 </ScrollArea>
               </div>
+              <div className="absolute top-40 right-4 w-[27%]">
+              <Photo1 />
+              </div>
             </TabsContent>
             <TabsContent value="education" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
@@ -368,6 +393,9 @@ const Resume = () => {
                   </ul>
                 </ScrollArea>
               </div>
+              <div className="absolute top-40 right-4 w-[27%]">
+              <Photo1 />
+              </div>
             </TabsContent>
             <TabsContent value="results" className="w-full">
               <h3 className="text-4xl font-bold">Results</h3>
@@ -397,8 +425,11 @@ const Resume = () => {
                   })}
                 </ul>
               </div>
+              <div className="absolute top-40 right-4 w-[27%]">
+              <Photo1 />
+              </div>
             </TabsContent>
-            <TabsContent value="Galary" className="w-full">
+            <TabsContent value="Gallery" className="w-full">
               <h3 className="text-4xl font-bold">Gallery</h3>
               <Gallery />
             </TabsContent>
@@ -406,11 +437,11 @@ const Resume = () => {
           </div>
         </Tabs>
       </div>
-      {/* Photo section moved to the rightmost side */}
+      {/* Photo section moved to the rightmost side
       <div className="absolute top-40 right-4 w-[27%]">
           <Photo1 />
         </div>
-
+      */}
     </motion.div>
   );
 };

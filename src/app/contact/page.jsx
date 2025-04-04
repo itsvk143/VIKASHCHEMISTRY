@@ -52,10 +52,10 @@ const Contact = () => {
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
           <div className="xl:h-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
-              <h3 className="text-4xl text-accent">Let's work together</h3>
-              <p className=" text-white/60">
-                Let’s team up and make impactful things happen.
+            <form className="flex flex-col gap-5 p-10 bg-[#27272c] rounded-xl">
+              <h3 className="text-3xl text-accent">Facing Difficulty in Chemistry ???</h3>
+              <p className=" text-xl text-white/60">
+              One step closer to easy chemistry—send your info!
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input type="firstname" placeholder="First Name" />
@@ -70,11 +70,9 @@ const Contact = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Select a service</SelectLabel>
-                    <SelectItem value="est">Web Development</SelectItem>
-                    <SelectItem value="cst">UI/UX Design</SelectItem>
-                    <SelectItem value="mst">
-                      React/NextJs Development
-                    </SelectItem>
+                    <SelectItem value="est">NEET</SelectItem>
+                    <SelectItem value="cst">JEE</SelectItem>
+                    <SelectItem value="mst">BOARD</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>

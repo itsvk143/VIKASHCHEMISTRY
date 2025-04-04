@@ -1,11 +1,19 @@
 import Link from "next/link";
 
 import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram } from "react-icons/fa6";
 
 const socials = [
-  { icon: <FaGithub />, path: "https://github.com/rollno-07" },
   {
     icon: <FaLinkedinIn />,
+    path: "https://www.linkedin.com/in/vivek-kumar-rawat-04a64b102/",
+  },
+  {
+    icon: <FaFacebook />,
+    path: "https://www.linkedin.com/in/vivek-kumar-rawat-04a64b102/",
+  },
+  {
+    icon: <FaInstagram />,
     path: "https://www.linkedin.com/in/vivek-kumar-rawat-04a64b102/",
   },
 ];

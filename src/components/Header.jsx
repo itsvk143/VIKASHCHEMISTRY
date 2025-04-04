@@ -12,7 +12,7 @@ const Header = () => {
             <Button variant="outline"
                   size="lg"
                   className="flex text-xl items-center gap-2">
-                 CVK Sir<span className="text-accent"></span>
+                 CVK Sir<span className="text-accent"></span> 
             </Button>
                 </Link>
 
@@ -26,7 +26,9 @@ const Header = () => {
           <MobileNav/>
         </div>
       </div>
+      
     </header>
+    
   );
 };
 
