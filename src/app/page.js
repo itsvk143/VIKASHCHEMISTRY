@@ -54,8 +54,8 @@ const Home = () => {
             </div>
           </div>
           {/* Profile Photo */}
-          <div className="order-1 xl:order-none mb-4 xl:mb-0">
-            <Photo />
+          <div className="order-first xl:order-last mb-4 xl:mb-0">
+          <Photo />
           </div>
         </div>
       </div>

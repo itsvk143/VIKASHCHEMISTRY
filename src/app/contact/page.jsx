@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Social from "@/components/Social";
 
 
-import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt, FaWhatsapp } from "react-icons/fa";
 
 import { motion } from "framer-motion";
 
@@ -22,7 +22,7 @@ import {
 
 const info = [
   {
-    icon: <FaPhoneAlt />,
+    icon: <FaWhatsapp />,
     title: "Phone",
     description: "(+91)8457876843",
   },
@@ -30,11 +30,6 @@ const info = [
     icon: <FaEnvelope />,
     title: "Email",
     description: "cvksir07@gmail.com",
-  },
-  {
-    icon: <FaEnvelope />,
-    title: "Email",
-    description: "itsvikash143@gmail.com",
   },
   {
     icon: <FaMapMarkedAlt />,

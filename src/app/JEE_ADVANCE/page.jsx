@@ -37,7 +37,7 @@ const mainTabs = [
   "ALCOHAL PHENOL & ETHER",
   "D & F BLOCK",
 
-  "SOLUTION & COLLIGATIVE PROPERTIES",
+  "SOLUTION AND COLLIGATIVE PROPERTIES",
   "ALDEHYDE & KETONES",
   "COORDINATION COMPOUND",
 
@@ -349,10 +349,21 @@ const JEE_ADVANCE = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [visiblePages, setVisiblePages] = useState(1);
+  const [isDownloading, setIsDownloading] = useState(false); // Track if downloading is happening
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
     setVisiblePages(1);
+  };
+
+  const handleDownload = (downloadLink) => {
+    setIsDownloading(true); // Trigger download state
+
+    // Use setTimeout to go back after a slight delay
+    setTimeout(() => {
+      setIsDownloading(false); // Reset download state
+      setActiveMainTab(null); // Go back to the previous page/tab
+    }, 2000); // Delay for 2 seconds before going back
   };
 
   return (
@@ -408,14 +419,12 @@ const JEE_ADVANCE = () => {
                             >
                               {book.name}
                             </a>
-                            <a
-                              href={book.downloadLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-gray-400 hover:text-white"
-                            >
-                              <Download size={20} />
-                            </a>
+                          <Button variant="outline" size="lg" asChild>
+                          <a href={book.downloadLink} target="_blank" rel="noopener noreferrer">
+                          <span className="hidden sm:inline">Click here to Download Book</span>
+                          <span className="inline sm:hidden">Download</span>
+                          </a>
+                          </Button>
                           </div>
                         </li>
                       ))}
@@ -447,14 +456,12 @@ const JEE_ADVANCE = () => {
                         <span className="text-accent hover:underline">
                           {pdf.name}
                         </span>
-                        <a
-                          href={pdf.downloadLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-white"
-                        >
-                          <Download size={20} />
-                        </a>
+                        <Button variant="outline" size="lg" asChild>
+                          <a href={pdf.downloadLink} target="_blank" rel="noopener noreferrer">
+                          <span className="hidden sm:inline">Click here to Download Book</span>
+                          <span className="inline sm:hidden">Download</span>
+                          </a>
+                          </Button>
                       </div>
                     </li>
                   ))}
