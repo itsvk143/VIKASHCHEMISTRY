@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { FiDownload } from "react-icons/fi";
 import Social from "@/components/Social";
 
 
@@ -26,6 +25,11 @@ const info = [
     icon: <FaPhoneAlt />,
     title: "Phone",
     description: "(+91)8457876843",
+  },
+  {
+    icon: <FaEnvelope />,
+    title: "Email",
+    description: "cvksir07@gmail.com",
   },
   {
     icon: <FaEnvelope />,

@@ -317,7 +317,7 @@ const Resume = () => {
             <TabsTrigger value="Gallery">Gallery</TabsTrigger>
 
             <div className="flex flex-col xl:flex-row items-center">
-              <a href="/assets/VikashKumarResume.pdf" download="Vikash_Kumar_Resume.pdf">
+              <a href="/assets/Vikash_Kumar_Resume.pdf" download="Vikash_Kumar_Resume.pdf">
                 <Button variant="outline" size="lg" className="uppercase flex items-center gap-10">
                   <span>Download CV</span>
                   <FiDownload className="text-xl" />

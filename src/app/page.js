@@ -1,5 +1,6 @@
 import Photo from "@/components/Photo";
 import Social from "@/components/Social";
+import Stats from "@/components/Stats";
 import { Button } from "@/components/ui/button";
 import { IoIosCall } from "react-icons/io";
 import { SiGmail } from "react-icons/si";
@@ -100,6 +101,7 @@ const Home = () => {
         </div>
       </div>
       </footer>
+      <Stats/>
     </section>
     
   );
