@@ -363,7 +363,7 @@ const JEE_ADVANCE = () => {
     setTimeout(() => {
       setIsDownloading(false); // Reset download state
       setActiveMainTab(null); // Go back to the previous page/tab
-    }, 2000); // Delay for 2 seconds before going back
+    }, 1000); // Delay for 1 seconds before going back
   };
 
   return (
