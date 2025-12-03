@@ -31,6 +31,10 @@ const links = [
     name: "CONTACT",
     path: "/contact",
   },
+  {
+    name: "CARRIER GUIDANCE",
+    path: "/Carrier",
+  },
 
 ];
 

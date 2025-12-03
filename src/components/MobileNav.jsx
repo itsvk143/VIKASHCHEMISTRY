@@ -12,6 +12,10 @@ const links = [
   { name: "NEET", path: "/NEET" },
   { name: "RESUME", path: "/resume" },
   { name: "CONTACT", path: "/contact" },
+  {
+    name: "CARRIER GUIDANCE",
+    path: "/Carrier",
+  },
 ];
 
 const MobileNav = () => {
@@ -54,3 +58,5 @@ const MobileNav = () => {
 };
 
 export default MobileNav;
+
+

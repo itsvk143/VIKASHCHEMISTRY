@@ -6,15 +6,15 @@ import { FaFacebook, FaInstagram } from "react-icons/fa6";
 const socials = [
   {
     icon: <FaLinkedinIn />,
-    path: "https://www.linkedin.com/in/vivek-kumar-rawat-04a64b102/",
+    path: "https://www.linkedin.com/in/itsvks143/",
   },
   {
     icon: <FaFacebook />,
-    path: "https://www.linkedin.com/in/vivek-kumar-rawat-04a64b102/",
+    path: "https://www.facebook.com/itsvks143/",
   },
   {
     icon: <FaInstagram />,
-    path: "https://www.linkedin.com/in/vivek-kumar-rawat-04a64b102/",
+    path: "https://www.instagram.com/itsvks143/?hl=en",
   },
 ];
 
