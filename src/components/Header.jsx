@@ -11,16 +11,16 @@ const Header = () => {
                 <Link href="/">
             <Button variant="outline"
                   size="lg"
-                  className="flex text-xl items-center gap-2">
+                  className="flex text-l items-center gap-2">
                  CVK Sir<span className="text-accent"></span> 
             </Button>
                 </Link>
 
         <div className="hidden xl:flex items-center gap-8">
           <Nav />
-          {/* <Link href="/">
-            <Button>Hire Me</Button>
-          </Link> */}
+          <Link href="/Carrier">
+            <Button>CARRER GUIDANCE</Button>
+          </Link>
         </div>
         <div className="xl:hidden">
           <MobileNav/>

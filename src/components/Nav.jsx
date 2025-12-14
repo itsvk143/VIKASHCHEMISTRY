@@ -9,13 +9,13 @@ const links = [
     path: "/",
   },
 
-  {
-    name: "JEE ADVANCE",
-    path: "/JEE_ADVANCE",
-  },
+  // {
+  //   name: "JEE ADVANCE",
+  //   path: "/JEE_ADVANCE",
+  // },
   
   {
-    name: "JEE MAINS",
+    name: "JEE",
     path: "/JEE_MAINS",
   },
   {
@@ -31,10 +31,10 @@ const links = [
     name: "CONTACT",
     path: "/contact",
   },
-  {
-    name: "CARRIER GUIDANCE",
-    path: "/Carrier",
-  },
+  // {
+  //   name: "CARRIER GUIDANCE",
+  //   path: "/Carrier",
+  // },
 
 ];
 

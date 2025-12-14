@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/Card";
 
 
 const about = {
+  
   title: "About Me",
   description:
     "My teaching methodology focuses on strong fundamentals, analytical thinking, and practical application of concepts to help students achieve their academic and career goals.",
@@ -39,8 +40,8 @@ const about = {
       fieldValue: "Available",
     },
     {
-      fieldName: "Language",
-      fieldValue: "English, Hindi",
+      fieldName: "Language:-",
+      fieldValue: "English, Hindi, Odia",
     },
   ],
 };

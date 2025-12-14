@@ -102,7 +102,7 @@ const Contact = () => {
               onSubmit={handleSubmit}
             >
               <h3 className="text-4xl text-accent">Facing Difficulty in Chemistry???</h3>
-              <p className="text-2xl text-white/60">
+              <p className="text-2xl text-white">
               ⇨ Your chemistry success story starts here
                 <br />⇨ Send your question or info to begin the journey
               </p>

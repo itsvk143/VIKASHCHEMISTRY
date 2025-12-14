@@ -1,3 +1,5 @@
+"use client";
+
 import Photo from "@/components/Photo";
 import Social from "@/components/Social";
 import Stats from "@/components/Stats";
@@ -6,7 +8,34 @@ import { IoIosCall } from "react-icons/io";
 import { SiGmail } from "react-icons/si";
 import { FaLocationDot } from "react-icons/fa6";
 
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+
 const Home = () => {
+  const router = useRouter();
+  const endRef = useRef(null);
+  const [triggered, setTriggered] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !triggered) {
+          setTriggered(true);
+
+          // Delay is optional (gives a smoother feel)
+          setTimeout(() => {
+            router.push("/resume"); // Navigate to Resume page
+          }, 600);
+        }
+      },
+      { threshold: 1 } // Element must be fully visible
+    );
+
+    if (endRef.current) observer.observe(endRef.current);
+
+    return () => observer.disconnect();
+  }, [triggered, router]);
+
   return (
     <section className="min-h-screen bg-black text-white flex flex-col justify-between">
       <div className="container mx-auto flex-1">
@@ -20,8 +49,9 @@ const Home = () => {
             <span className="text-yellow-500 text-lg">
               Passionate about making Chemistry easy and interesting.
             </span>
+
             <p className="max-w-[500px] mb-2 pb-5 text-white/80">
-              SENIOR CHEMISTRY LECTURAR WITH 9+ YEARS OF EXPERIENCE
+              SENIOR CHEMISTRY LECTURER WITH 10+ YRS OF EXPERIENCE
             </p>
 
             {/* Exam Buttons */}
@@ -139,6 +169,9 @@ const Home = () => {
       <div className="bg-black w-full">
         <Stats />
       </div>
+
+      {/* 👇 Auto-scroll trigger (when visible → go to Resume page) */}
+      <div ref={endRef} className="h-1"></div>
     </section>
   );
 };
