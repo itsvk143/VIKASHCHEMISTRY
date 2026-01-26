@@ -1,67 +1,77 @@
-
 "use client";
 
-import { useState, useRef, useCallback } from "react";
-import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
+import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import { Document, Page } from "react-pdf";
-import "react-pdf/dist/esm/Page/TextLayer.css";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import { Input } from "@/components/ui/input";
+import { 
+  Download, 
+  BookOpen, 
+  FileText, 
+  ChevronLeft, 
+  Search, 
+  Atom, 
+  Layers,
+  Dna,
+  Calculator,
+  Library,
+  FlaskConical
+} from "lucide-react";
 
-const mainTabs = [
-  "IMPORTANT BOOK",
-  "NOMENCLATURE",
-  "TEST PAPERS",
+// --- 1. CHAPTER CATEGORIZATION ---
+const groupedChapters = {
+  Physical: [
+    "MOLE CONCEPT",
+    "STRUCTURE OF ATOM",
+    "STATES OF MATTER",
+    "THERMODYNAMICS",
+    "CHEMICAL EQUILIBRIUM",
+    "IONIC EQULIBRIUM",
+    "REDOX REACTION",
+    "SOLID STATE",
+    "SOLUTION AND COLLIGATIVE PROPERTIES",
+    "ELECTROCHEMISTRY",
+    "CHEMICAL KINETICS"
+  ],
+  Organic: [
+    "NOMENCLATURE",
+    "ISOMERISM",
+    "GOC 1 & 2",
+    "HYDROCARBON",
+    "REACTION MECHANISM",
+    "HALOARENE & HALOALKANES",
+    "ALCOHAL PHENOL & ETHER",
+    "ALDEHYDE & KETONES",
+    "CARBOXYLIC ACID & ITS DERIVATIVE",
+    "NITROGEN CONTAINING COMPOUND",
+    "BIOMOLECULES",
+    "POC",
+    "POLYMERS",
+    "CHEMISTRY IN EVERYDAY LIFE"
+  ],
+  Inorganic: [
+    "PERIODIC TABLES",
+    "CHEMICAL BONDING",
+    "HYDROGEN",
+    "S BLOCK",
+    "P BLOCK(GROUP 13 & 14)",
+    "P BLOCK(GROUP 15 & 16)",
+    "P BLOCK(GROUP 17 & 18)",
+    "D & F BLOCK",
+    "COORDINATION COMPOUND",
+    "METALLURGY",
+    "QUALITATIVE ANALYSIS"
+  ],
+  Other: [
+    "IMPORTANT BOOK",
+    "TEST PAPERS",
+    "PRACTICE QUESTION",
+    "mnemonic"
+  ]
+};
 
-  "MOLE CONCEPT",
-  "ISOMERISM",
-  "PERIODIC TABLES",
-
-  "STRUCTURE OF ATOM",
-  "GOC 1 & 2",
-  "CHEMICAL BONDING",
-
-  "THERMODYNAMICS",
-  "HYDROCARBON",
-  "P BLOCK(GROUP 13 & 14)",
-
-  "CHEMICAL EQUILIBRIUM",
-  "REACTION MECHANISM",
-  "P BLOCK(GROUP 15 & 16)",
-
-  "IONIC EQUILIBRIUM",
-  "HALOALKANES & HALOARENES",
-  "P BLOCK(GROUP 17 & 18)",
-
-  "REDOX REACTION",
-  "ALCOHAL PHENOL & ETHER",
-  "D & F BLOCK",
-
-  "SOLUTION & COLLIGATIVE PROPERTIES",
-  "ALDEHYDE & KETONES",
-  "COORDINATION COMPOUND",
-
-  "ELECTROCHEMISTRY",
-  "CARBOXYLIC ACID & ITS DERIVATIVE",
-  "QUALITATIVE ANALYSIS(CATION)",
-
-  "CHEMICAL KINETICS",
-  "NITROGEN CONTAINING COMPOUND",
-  "QUALITATIVE ANALYSIS(ANION)",
-
-  "PRACTICE QUESTION",
-  "BIOMOLECULES",
-  "mnemonic",
-
-  "",
-  "POC",
-  "",
-
-];
-
+// --- 2. BOOK DATA ---
 const importantBooks = {
   Physical: [
     { name: "Advance Problem in Physical by N Avasthi ", link: "https://drive.google.com/file/d/1ZLB5A542Ow8SqWAkUSJDpcmUpM8eL6mj/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1ZLB5A542Ow8SqWAkUSJDpcmUpM8eL6mj/view?usp=drive_link" },
@@ -77,7 +87,6 @@ const importantBooks = {
     { name: "Cengage Book Part 1", link: "https://drive.google.com/drive/folders/1I2c8kDN8XYSp0P_rVCk3JnuZxwgx1SYb?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1I2c8kDN8XYSp0P_rVCk3JnuZxwgx1SYb?usp=drive_link" },
     { name: "Cengage Book Part 2", link: "https://drive.google.com/drive/folders/1pNqLQiH-9YLTL-n9twRYCWOhnfvQQAFY?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1pNqLQiH-9YLTL-n9twRYCWOhnfvQQAFY?usp=drive_link" },
     { name: "Peter Sykes", link: "https://drive.google.com/file/d/1VEdNuiUpyAGEiRhKoKQQnvthnUTAYrQH/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1VEdNuiUpyAGEiRhKoKQQnvthnUTAYrQH/view?usp=drive_link" },
-  
   ],
   Inorganic: [
     { name: "Concise Inorganic Chemistry by J.D. Lee", link: "https://drive.google.com/file/d/132k2vCUNwDrqr3W71W0w9kX--S0uavnZ/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/132k2vCUNwDrqr3W71W0w9kX--S0uavnZ/view?usp=drive_link" },
@@ -87,16 +96,13 @@ const importantBooks = {
     { name: "V Joshi Part 2", link: " https://drive.google.com/file/d/1QyQ5wsqYX87nXGtnptkuTSsKly5yd8BG/view?usp=drive_link", downloadLink: " https://drive.google.com/file/d/1QyQ5wsqYX87nXGtnptkuTSsKly5yd8BG/view?usp=drive_link" },
     { name: "V K Jaishwal Part 1", link: "https://drive.google.com/file/d/1cPTwUSMuya8aYKm0ILGbDs2msalZB6dU/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1cPTwUSMuya8aYKm0ILGbDs2msalZB6dU/view?usp=drive_link" },
     { name: "V K Jaishwal Part 2", link: " https://drive.google.com/file/d/1XGUcsbDu7nWgaRhzkTQOCn0U7eQVcPgG/view?usp=drive_link", downloadLink: " https://drive.google.com/file/d/1XGUcsbDu7nWgaRhzkTQOCn0U7eQVcPgG/view?usp=drive_link" },
-   
   ],
-  Complete_Chemistry: [
-    { name: "Advance Problem in Physical by N Avasthi ", link: "https://drive.google.com/file/d/1ZLB5A542Ow8SqWAkUSJDpcmUpM8eL6mj/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1ZLB5A542Ow8SqWAkUSJDpcmUpM8eL6mj/view?usp=drive_link" },
-    { name: "Cengage Book Part 1", link: "https://drive.google.com/drive/folders/1Ra_4YLp2JAriZbNI2tH5Cjpvk3hxEDBE?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1Ra_4YLp2JAriZbNI2tH5Cjpvk3hxEDBE?usp=drive_link" },
-    { name: "Cengage Book Part 2", link: "https://drive.google.com/drive/folders/1wgHvFylGTRjx7xn6JjK2ieUKCvYSi4Fw?usp=drive_link", downloadLink: "https://drive.google.com/drive/folders/1wgHvFylGTRjx7xn6JjK2ieUKCvYSi4Fw?usp=drive_link" },
-    { name: "GRB O P Tondon ", link: "https://drive.google.com/file/d/19wN71LUnzeIcl-F2EGAo9mN-MAY-ZFU2/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/19wN71LUnzeIcl-F2EGAo9mN-MAY-ZFU2/view?usp=drive_link" },
-  ],
+  Other: [
+     { name: "Complete Chemistry Collection", link: "#", downloadLink: "#" }, // Placeholder if needed
+  ]
 };
 
+// --- 3. FULL PDF DATA ---
 const pdfData = {
   "MOLE CONCEPT": [
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
@@ -104,7 +110,6 @@ const pdfData = {
     { name: "DPP2", link: "https://drive.google.com/file/d/1hn0ynj4pB8b_V_Ac3MBs5RPW7iXJZ18s/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1hn0ynj4pB8b_V_Ac3MBs5RPW7iXJZ18s/view?usp=drive_link" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
-
   ],
   "STRUCTURE OF ATOM": [
     { name: "Printed Notes", link: "https://drive.google.com/file/d/1nxNlR1W3GWkaEhj8-ATmqL1k1s90UBZr/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1nxNlR1W3GWkaEhj8-ATmqL1k1s90UBZr/view?usp=drive_link" },
@@ -118,7 +123,7 @@ const pdfData = {
     { name: "DPP1", link: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1LKW6AGz2KQf86W0k1RBsQeoBkxn9Mt_n/view?usp=drive_link" },
     { name: "DPP2", link: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1FfyO_YthDU_XHSrWatcgMKlwOnPlHct9/view?usp=drive_link" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/16hjw39bILCBPnwMeSt8fHz1pbp3V0wxF/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/16hjw39bILCBPnwMeSt8fHz1pbp3V0wxF/view?usp=drive_link" },
- ],
+  ],
   "CHEMICAL BONDING": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/1MS24k4rs7MibnRQDGzKNWnhMKbUwfepF/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1MS24k4rs7MibnRQDGzKNWnhMKbUwfepF/view?usp=drive_link" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/1xGLdJ9j-9RbhoFZcMM_96nfKWEf_TU5F/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1xGLdJ9j-9RbhoFZcMM_96nfKWEf_TU5F/view?usp=drive_link" },
@@ -128,7 +133,7 @@ const pdfData = {
     { name: "DPP3", link: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1SjL829VVzHO_-O8N2GqrJqWqm3_OpLa0/view?usp=drive_link" },
     { name: "DPP4", link: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1d4htny-dn1gp1l44rv-Vyi3izTq9Ozg1/view?usp=drive_link" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
- ],
+  ],
   "STATES OF MATTER": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
@@ -234,14 +239,13 @@ const pdfData = {
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
   ],
-  "  NITROGEN CONTAINING COMPOUND": [
+  "NITROGEN CONTAINING COMPOUND": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
   ],
-  "BIOMOLECULES"
-  : [
+  "BIOMOLECULES": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
@@ -253,7 +257,7 @@ const pdfData = {
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
   ],
-  "  CHEMISTRY IN EVERYDAY LIFE": [
+  "CHEMISTRY IN EVERYDAY LIFE": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
@@ -296,7 +300,13 @@ const pdfData = {
     { name: "Printed Notes", link: "https://drive.google.com/file/d/18wii4ml6Qi9KeqCihT4MIWkx992JjRO_/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/18wii4ml6Qi9KeqCihT4MIWkx992JjRO_/view?usp=drive_link" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/1QGYtc6VizSPNpyJUMmeufypKLBbzucFG/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1QGYtc6VizSPNpyJUMmeufypKLBbzucFG/view?usp=drive_link" },
   ],
-  "SURFACE CHEMISTRY": [
+   "TEST PAPERS": [
+     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
+     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
+     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
+     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
+   ],
+   "QUALITATIVE ANALYSIS": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
@@ -314,160 +324,246 @@ const pdfData = {
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
   ],
-  "CHEMISTRY IN EVERYDAY LIFE": [
-    { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
-    { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
-    { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
-    { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
-   ],
-   "TEST PAPERS": [
-     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
-     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
-     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
-     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
-   ],
-   "QUALITATIVE ANALYSIS": [
-    { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
-    { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
-    { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
-    { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
-  ],
-  
-  
 };
 
+// --- 4. HELPER FUNCTIONS ---
+const getCategoryStyle = (category) => {
+  switch(category) {
+    case 'Physical': return { 
+      icon: <Calculator className="w-5 h-5" />, 
+      color: 'text-blue-400', 
+      border: 'border-blue-500/30',
+      bg: 'bg-blue-500/10'
+    };
+    case 'Organic': return { 
+      icon: <Dna className="w-5 h-5" />, 
+      color: 'text-emerald-400', 
+      border: 'border-emerald-500/30',
+      bg: 'bg-emerald-500/10'
+    };
+    case 'Inorganic': return { 
+      icon: <Atom className="w-5 h-5" />, 
+      color: 'text-purple-400', 
+      border: 'border-purple-500/30',
+      bg: 'bg-purple-500/10'
+    };
+    default: return { 
+      icon: <Library className="w-5 h-5" />, 
+      color: 'text-amber-400', 
+      border: 'border-amber-500/30',
+      bg: 'bg-amber-500/10'
+    };
+  }
+};
+
+const ResourceList = ({ items, compact = false }) => {
+  if (!items || items.length === 0) return null;
+  
+  return (
+    <div className={`grid gap-3 ${compact ? 'content-start' : ''}`}>
+      {items.map((item, idx) => (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: idx * 0.05 }}
+          key={idx}
+          className={`group flex flex-col ${compact ? 'items-stretch' : 'sm:flex-row sm:items-center'} justify-between p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-blue-500/50 rounded-lg transition-all duration-300`}
+        >
+          <div className="flex items-center gap-3 mb-2 sm:mb-0">
+            {!compact && (
+               <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
+                 <FileText className="w-4 h-4" />
+               </div>
+            )}
+            <span className={`font-medium text-slate-200 group-hover:text-white transition-colors ${compact ? 'text-sm' : ''}`}>
+              {item.name}
+            </span>
+          </div>
+
+          <div className={`flex items-center gap-2 ${compact ? 'mt-2' : 'w-full sm:w-auto'}`}>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex-1 hover:bg-slate-700 text-slate-300 h-8 text-xs"
+              asChild
+            >
+              <a href={item.link} target="_blank" rel="noopener noreferrer">View</a>
+            </Button>
+            <Button 
+              variant="default" 
+              size="sm" 
+              className="flex-1 bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 h-8 text-xs"
+              asChild
+            >
+              <a href={item.downloadLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                <Download className="w-3 h-3" />
+                <span>Download</span>
+              </a>
+            </Button>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+// --- 5. MAIN COMPONENT ---
 const JEE_MAINS = () => {
   const [activeMainTab, setActiveMainTab] = useState(null);
-   const [selectedPdf, setSelectedPdf] = useState(null);
-   const [numPages, setNumPages] = useState(null);
-   const [visiblePages, setVisiblePages] = useState(1);
-   const [isDownloading, setIsDownloading] = useState(false); // Track if downloading is happening
- 
-   const onDocumentLoadSuccess = ({ numPages }) => {
-     setNumPages(numPages);
-     setVisiblePages(1);
-   };
- 
-   const handleDownload = (downloadLink) => {
-     setIsDownloading(true); // Trigger download state
- 
-     // Use setTimeout to go back after a slight delay
-     setTimeout(() => {
-       setIsDownloading(false); // Reset download state
-       setActiveMainTab(null); // Go back to the previous page/tab
-     }, 2000); // Delay for 2 seconds before going back
-   };
- 
-   return (
-     <motion.div
-       initial={{ opacity: 0 }}
-       animate={{
-         opacity: 1,
-         transition: { delay: 0.5, duration: 0.4 },
-       }}
-       className="min-h-[80vh] flex items-center justify-center py-12"
-     >
-       <div className="container mx-auto">
-         <Tabs className="flex flex-col xl:flex-row gap-[40px]">
-           {!activeMainTab && (
-             <TabsList className="grid w-full gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-               {mainTabs.map((mainTab) => (
-                 <TabsTrigger
-                   key={mainTab}
-                   value={mainTab}
-                   onClick={() => setActiveMainTab(mainTab)}
-                 >
-                   {mainTab}
-                 </TabsTrigger>
-               ))}
-             </TabsList>
-           )}
- 
-           {activeMainTab === "IMPORTANT BOOK" && (
-             <div className="w-full">
-               <div className="bg-gray-900 p-4 rounded-lg ">
-                 <Button
-                   onClick={() => setActiveMainTab(null)}
-                   className="mb-4 bg-accent hover:bg-accent"
-                 >
-                   ← Back to Chapters
-                 </Button>
-                 <h3 className="text-2xl font-bold mb-4">{activeMainTab}</h3>
-                 <ScrollArea className="h-[400px]">
-                   {Object.keys(importantBooks).map((category) => (
-                     <div key={category} className="mb-4">
-                       <h4 className="text-xl font-semibold mb-2">{category}</h4>
-                       {importantBooks[category].map((book, id) => (
-                         <li
-                           key={id}
-                           className="bg-gray-800 py-2 px-3 rounded-xl text-center cursor-pointer mb-4" // Reduced py-4 to py-2 to reduce padding
-                         >
-                           <div className="flex justify-between items-center">
-                             <a
-                               href={book.link}
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               className="text-accent hover:underline"
-                             >
-                               {book.name}
-                             </a>
-                           <Button variant="outline" size="lg" asChild>
-                           <a href={book.downloadLink} target="_blank" rel="noopener noreferrer">
-                           <span className="hidden sm:inline">Click here to Download Book</span>
-                           <span className="inline sm:hidden">Download</span>
-                           </a>
-                           </Button>
-                           </div>
-                         </li>
-                       ))}
-                     </div>
-                   ))}
-                 </ScrollArea>
-               </div>
-             </div>
-           )}
- 
-           {activeMainTab && pdfData[activeMainTab] && !selectedPdf && (
-             <div className="w-full">
-               <div className="bg-gray-900 p-4 rounded-lg">
-                 <Button
-                   onClick={() => setActiveMainTab(null)}
-                   className="mb-4 bg-accent hover:bg-accent"
-                 >
-                   ← Back to Chapters
-                 </Button>
-                 <h3 className="text-2xl font-bold mb-4">{activeMainTab}</h3>
-                 <ScrollArea className="h-[400px]">
-                   {pdfData[activeMainTab].map((pdf, id) => (
-                     <li
-                       key={id}
-                       className="bg-gray-800 py-2 px-3 rounded-xl text-center cursor-pointer mb-4" // Reduced py-4 to py-2 to reduce padding
-                       onClick={() => setSelectedPdf(pdf.link)}
-                     >
-                       <div className="flex justify-between items-center">
-                         <span className="text-accent hover:underline">
-                           {pdf.name}
-                         </span>
-                         <Button variant="outline" size="lg" asChild>
-                           <a href={pdf.downloadLink} target="_blank" rel="noopener noreferrer">
-                           <span className="hidden sm:inline">Click here to Download Book</span>
-                           <span className="inline sm:hidden">Download</span>
-                           </a>
-                           </Button>
-                       </div>
-                     </li>
-                   ))}
-                 </ScrollArea>
-               </div>
-             </div>
-           )}
-         </Tabs>
-       </div>
-     </motion.div>
-   );
- };
- 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8 font-sans">
+      <div className="max-w-[95rem] mx-auto">
+        
+        <AnimatePresence mode="wait">
+          {!activeMainTab ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="space-y-8"
+              key="dashboard"
+            >
+              {/* Header & Search */}
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+                <div>
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                    Chemistry Dashboard
+                  </h1>
+                  <p className="text-slate-400 mt-1">Select a chapter from the categories below</p>
+                </div>
+                <div className="relative w-full md:w-96">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
+                  <Input 
+                    placeholder="Search chapters..." 
+                    className="pl-10 bg-slate-900 border-slate-800 focus:border-blue-500 transition-colors"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* 4-COLUMN CATEGORY GRID */}
+              <ScrollArea className="h-[75vh] pr-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 pb-12">
+                  
+                  {Object.entries(groupedChapters).map(([category, chapters], catIdx) => {
+                    const style = getCategoryStyle(category);
+                    
+                    // Filter chapters within this category
+                    const filteredChapters = chapters.filter(c => 
+                      c.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+
+                    // If searching and no matches in this category, hide it
+                    if (searchTerm && filteredChapters.length === 0) return null;
+
+                    return (
+                      <motion.div
+                        key={category}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: catIdx * 0.1 }}
+                        className="flex flex-col h-full bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden"
+                      >
+                        {/* Category Header */}
+                        <div className={`p-4 border-b border-slate-800 flex items-center gap-3 ${style.bg}`}>
+                          <div className={`p-2 rounded-lg bg-slate-950 ${style.color}`}>
+                            {style.icon}
+                          </div>
+                          <h3 className={`font-bold text-lg ${style.color}`}>{category}</h3>
+                        </div>
+
+                        {/* Chapter List */}
+                        <div className="p-3 grid gap-2">
+                          {filteredChapters.map((chapter) => (
+                            <div
+                              key={chapter}
+                              onClick={() => setActiveMainTab(chapter)}
+                              className="group flex items-center justify-between p-3 rounded-lg hover:bg-slate-800 border border-transparent hover:border-slate-700 cursor-pointer transition-all"
+                            >
+                              <span className="text-sm font-medium text-slate-300 group-hover:text-white truncate">
+                                {chapter}
+                              </span>
+                              <ChevronLeft className="w-4 h-4 text-slate-600 group-hover:text-blue-400 rotate-180 opacity-0 group-hover:opacity-100 transition-all" />
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+
+                </div>
+              </ScrollArea>
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              key="details"
+              className="space-y-6"
+            >
+              {/* Detail Header */}
+              <div className="flex items-center gap-4 border-b border-slate-800 pb-6">
+                <Button 
+                  onClick={() => setActiveMainTab(null)}
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full bg-slate-900 border-slate-700 hover:bg-slate-800 hover:text-blue-400"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </Button>
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-100">{activeMainTab}</h2>
+                  <p className="text-slate-400 text-sm">Access available resources below</p>
+                </div>
+              </div>
+
+              {/* Resource Content */}
+              <ScrollArea className="h-[70vh]">
+                <div className="pb-12 max-w-[95rem] mx-auto">
+                  {activeMainTab === "IMPORTANT BOOK" ? (
+                    <div className="space-y-8">
+                        {/* 4 Column Layout for Important Books */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                          {["Physical", "Organic", "Inorganic", "Other"].map((category) => (
+                            <div key={category} className="bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col h-full hover:border-slate-700 transition-colors">
+                              <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 pb-2 border-b border-slate-800 ${
+                                category === 'Physical' ? 'text-blue-400' : 
+                                category === 'Organic' ? 'text-emerald-400' : 
+                                category === 'Inorganic' ? 'text-purple-400' : 'text-amber-400'
+                              }`}>
+                                <Layers className="w-5 h-5" />
+                                {category} Books
+                              </h3>
+                              <ResourceList items={importantBooks[category]} compact={true} />
+                            </div>
+                          ))}
+                        </div>
+                    </div>
+                  ) : pdfData[activeMainTab] ? (
+                    <div className="max-w-4xl mx-auto">
+                        <ResourceList items={pdfData[activeMainTab]} />
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-20 text-slate-500">
+                      <FileText className="w-16 h-16 mb-4 opacity-20" />
+                      <p>No specific resources uploaded for this section yet.</p>
+                      <Button variant="link" onClick={() => setActiveMainTab(null)}>
+                        Go back to dashboard
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </ScrollArea>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
 export default JEE_MAINS;
-
-
-
