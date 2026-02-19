@@ -22,12 +22,8 @@ import {
 
 import {
   chemistryChapters,
-  physicsChapters,
-  mathsChapters,
-  importantBooks,
   chemistryResources,
-  physicsResources,
-  mathsResources
+  importantBooks
 } from "./data";
 
 // --- HELPER FUNCTIONS ---

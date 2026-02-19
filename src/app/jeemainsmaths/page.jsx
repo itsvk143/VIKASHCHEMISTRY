@@ -21,13 +21,9 @@ import {
 } from "lucide-react";
 
 import {
-  chemistryChapters,
-  physicsChapters,
   mathsChapters,
-  importantBooks,
-  chemistryResources,
-  physicsResources,
-  mathsResources
+  mathsResources,
+  importantBooks
 } from "./data";
 
 // --- HELPER FUNCTIONS ---

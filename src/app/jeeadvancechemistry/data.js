@@ -50,82 +50,6 @@ export const chemistryChapters = {
     ]
 };
 
-export const physicsChapters = {
-    "Mechanics": [
-        "Units & Dimensions",
-        "Kinematics",
-        "Laws of Motion",
-        "Work, Power & Energy",
-        "Rotational Motion",
-        "Gravitation",
-        "Properties of Solids & Liquids"
-    ],
-    "Electrodynamics": [
-        "Electrostatics",
-        "Current Electricity",
-        "Capacitance",
-        "Magnetic Effects of Current",
-        "EMI & AC"
-    ],
-    "Modern Physics": [
-        "Dual Nature of Radiation",
-        "Atoms & Nuclei",
-        "Semiconductor Devices"
-    ],
-    "Optics & Waves": [
-        "Ray Optics",
-        "Wave Optics",
-        "SHM & Waves"
-    ],
-    "Thermal Physics": [
-        "Thermal Properties of Matter",
-        "Thermodynamics",
-        "KTG"
-    ],
-    Other: [
-        "IMPORTANT BOOK",
-        "TEST PAPERS",
-        "PRACTICE QUESTION"
-    ]
-};
-
-export const mathsChapters = {
-    "Algebra": [
-        "Quadratic Equations",
-        "Complex Numbers",
-        "Sequences & Series",
-        "Binomial Theorem",
-        "Permutation & Combination",
-        "Probability",
-        "Matrices & Determinants"
-    ],
-    "Calculus": [
-        "Functions",
-        "Limits, Continuity & Differentiability",
-        "Application of Derivatives",
-        "Indefinite Integration",
-        "Definite Integration",
-        "Differential Equations"
-    ],
-    "Coordinate Geometry": [
-        "Straight Lines",
-        "Circle",
-        "Parabola",
-        "Ellipse",
-        "Hyperbola"
-    ],
-    "Trigonometry & Vectors": [
-        "Trigonometry",
-        "Vectors",
-        "3D Geometry"
-    ],
-    Other: [
-        "IMPORTANT BOOK",
-        "TEST PAPERS",
-        "PRACTICE QUESTION"
-    ]
-};
-
 export const importantBooks = {
     Chemistry: {
         Physical: [
@@ -155,37 +79,6 @@ export const importantBooks = {
         Other: [
             { name: "Complete Chemistry Collection", link: "#", downloadLink: "#" },
         ]
-    },
-    Physics: {
-        "Mechanics": [
-            { name: "Concepts of Physics (H.C. Verma)", link: "#", downloadLink: "#" },
-            { name: "Problems in General Physics (I.E. Irodov)", link: "#", downloadLink: "#" }
-        ],
-        "Electrodynamics": [
-            { name: "Understanding Physics for JEE Main & Advanced", link: "#", downloadLink: "#" }
-        ],
-        "Modern Physics": [],
-        "Optics & Waves": [],
-        "Thermal Physics": [],
-        Other: []
-    },
-    Maths: {
-        "Algebra": [
-            { name: "Cengage Algebra", link: "#", downloadLink: "#" },
-            { name: "Higher Algebra (Hall & Knight)", link: "#", downloadLink: "#" }
-        ],
-        "Calculus": [
-            { name: "Cengage Calculus", link: "#", downloadLink: "#" },
-            { name: "Sameer Bansal Calculus", link: "#", downloadLink: "#" }
-        ],
-        "Coordinate Geometry": [
-            { name: "Cengage Coordinate Geometry", link: "#", downloadLink: "#" },
-            { name: "S.L. Loney", link: "#", downloadLink: "#" }
-        ],
-        "Trigonometry & Vectors": [
-            { name: "S.L. Loney Plane Trigonometry", link: "#", downloadLink: "#" }
-        ],
-        Other: []
     }
 };
 
@@ -411,22 +304,3 @@ export const chemistryResources = {
         { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
     ],
 };
-
-const commonResources = [
-    { name: "Handwritten Notes", link: "#", downloadLink: "#" },
-    { name: "Printed Notes", link: "#", downloadLink: "#" },
-    { name: "PYQ", link: "#", downloadLink: "#" },
-    { name: "Important Questions", link: "#", downloadLink: "#" },
-    { name: "DPP 1", link: "#", downloadLink: "#" },
-    { name: "DPP 2", link: "#", downloadLink: "#" },
-];
-
-export const physicsResources = {};
-Object.values(physicsChapters).flat().forEach(chapter => {
-    physicsResources[chapter] = commonResources;
-});
-
-export const mathsResources = {};
-Object.values(mathsChapters).flat().forEach(chapter => {
-    mathsResources[chapter] = commonResources;
-});
