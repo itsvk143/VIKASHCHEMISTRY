@@ -4,19 +4,21 @@ import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { 
-  Download, 
-  BookOpen, 
-  FileText, 
-  ChevronLeft, 
-  Search, 
-  Atom, 
+
+import {
+  Download,
+  BookOpen,
+  FileText,
+  ChevronLeft,
+
+  Atom,
   Layers,
   Dna,
   Calculator,
   Library,
-  FlaskConical
+  FlaskConical,
+  Zap,
+  Leaf
 } from "lucide-react";
 
 // --- 1. CHAPTER CATEGORIZATION ---
@@ -98,7 +100,7 @@ const importantBooks = {
     { name: "V K Jaishwal Part 2", link: " https://drive.google.com/file/d/1XGUcsbDu7nWgaRhzkTQOCn0U7eQVcPgG/view?usp=drive_link", downloadLink: " https://drive.google.com/file/d/1XGUcsbDu7nWgaRhzkTQOCn0U7eQVcPgG/view?usp=drive_link" },
   ],
   Other: [
-     { name: "Complete Chemistry Collection", link: "#", downloadLink: "#" }, // Placeholder if needed
+    { name: "Complete Chemistry Collection", link: "#", downloadLink: "#" }, // Placeholder if needed
   ]
 };
 
@@ -274,7 +276,7 @@ const pdfData = {
     { name: "Printed Notes", link: "https://drive.google.com/file/d/1pHmCkcYINw4tidMRCvhancq-H5r3c4bZ/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1pHmCkcYINw4tidMRCvhancq-H5r3c4bZ/view?usp=drive_link" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/1VPZz36ih3gCqfdQNKOoGxHa7JXKhC1aO/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1VPZz36ih3gCqfdQNKOoGxHa7JXKhC1aO/view?usp=drive_link" },
   ],
-  "P BLOCK(GROUP 13 & 14)" : [
+  "P BLOCK(GROUP 13 & 14)": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/1ZyxoD2lGLKnbg8v96B2zHd40QFUe3Ykb/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1ZyxoD2lGLKnbg8v96B2zHd40QFUe3Ykb/view?usp=drive_link" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/1NcAvVTI-P5Hs-WiY4zv-alBqjzZ7NZKM/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1NcAvVTI-P5Hs-WiY4zv-alBqjzZ7NZKM/view?usp=drive_link" },
@@ -300,13 +302,13 @@ const pdfData = {
     { name: "Printed Notes", link: "https://drive.google.com/file/d/18wii4ml6Qi9KeqCihT4MIWkx992JjRO_/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/18wii4ml6Qi9KeqCihT4MIWkx992JjRO_/view?usp=drive_link" },
     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/1QGYtc6VizSPNpyJUMmeufypKLBbzucFG/view?usp=drive_link", downloadLink: "https://drive.google.com/file/d/1QGYtc6VizSPNpyJUMmeufypKLBbzucFG/view?usp=drive_link" },
   ],
-   "TEST PAPERS": [
-     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
-     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
-     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
-     { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
-   ],
-   "QUALITATIVE ANALYSIS": [
+  "TEST PAPERS": [
+    { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
+    { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
+    { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
+    { name: "Important & Topic-wise Questions", link: "https://drive.google.com/file/d/7/preview", downloadLink: "https://drive.google.com/uc?export=download&id=7" },
+  ],
+  "QUALITATIVE ANALYSIS": [
     { name: "Handwritten Notes", link: "https://drive.google.com/file/d/4/preview", downloadLink: "https://drive.google.com/uc?export=download&id=4" },
     { name: "Printed Notes", link: "https://drive.google.com/file/d/5/preview", downloadLink: "https://drive.google.com/uc?export=download&id=5" },
     { name: "Previous Year Questions", link: "https://drive.google.com/file/d/6/preview", downloadLink: "https://drive.google.com/uc?export=download&id=6" },
@@ -328,28 +330,28 @@ const pdfData = {
 
 // --- 4. HELPER FUNCTIONS ---
 const getCategoryStyle = (category) => {
-  switch(category) {
-    case 'Physical': return { 
-      icon: <Calculator className="w-5 h-5" />, 
-      color: 'text-blue-400', 
+  switch (category) {
+    case 'Physical': return {
+      icon: <Calculator className="w-5 h-5" />,
+      color: 'text-blue-400',
       border: 'border-blue-500/30',
       bg: 'bg-blue-500/10'
     };
-    case 'Organic': return { 
-      icon: <Dna className="w-5 h-5" />, 
-      color: 'text-emerald-400', 
+    case 'Organic': return {
+      icon: <Dna className="w-5 h-5" />,
+      color: 'text-emerald-400',
       border: 'border-emerald-500/30',
       bg: 'bg-emerald-500/10'
     };
-    case 'Inorganic': return { 
-      icon: <Atom className="w-5 h-5" />, 
-      color: 'text-purple-400', 
+    case 'Inorganic': return {
+      icon: <Atom className="w-5 h-5" />,
+      color: 'text-purple-400',
       border: 'border-purple-500/30',
       bg: 'bg-purple-500/10'
     };
-    default: return { 
-      icon: <Library className="w-5 h-5" />, 
-      color: 'text-amber-400', 
+    default: return {
+      icon: <Library className="w-5 h-5" />,
+      color: 'text-amber-400',
       border: 'border-amber-500/30',
       bg: 'bg-amber-500/10'
     };
@@ -358,7 +360,7 @@ const getCategoryStyle = (category) => {
 
 const ResourceList = ({ items, compact = false }) => {
   if (!items || items.length === 0) return null;
-  
+
   return (
     <div className={`grid gap-3 ${compact ? 'content-start' : ''}`}>
       {items.map((item, idx) => (
@@ -371,9 +373,9 @@ const ResourceList = ({ items, compact = false }) => {
         >
           <div className="flex items-center gap-3 mb-2 sm:mb-0">
             {!compact && (
-               <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
-                 <FileText className="w-4 h-4" />
-               </div>
+              <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
+                <FileText className="w-4 h-4" />
+              </div>
             )}
             <span className={`font-medium text-slate-200 group-hover:text-white transition-colors ${compact ? 'text-sm' : ''}`}>
               {item.name}
@@ -381,17 +383,17 @@ const ResourceList = ({ items, compact = false }) => {
           </div>
 
           <div className={`flex items-center gap-2 ${compact ? 'mt-2' : 'w-full sm:w-auto'}`}>
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="flex-1 hover:bg-slate-700 text-slate-300 h-8 text-xs"
               asChild
             >
               <a href={item.link} target="_blank" rel="noopener noreferrer">View</a>
             </Button>
-            <Button 
-              variant="default" 
-              size="sm" 
+            <Button
+              variant="default"
+              size="sm"
               className="flex-1 bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 h-8 text-xs"
               asChild
             >
@@ -408,14 +410,15 @@ const ResourceList = ({ items, compact = false }) => {
 };
 
 // --- 5. MAIN COMPONENT ---
-const JEE_MAINS = () => {
+const NEET = () => {
   const [activeMainTab, setActiveMainTab] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [activeSubject, setActiveSubject] = useState("Chemistry");
+
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8 font-sans">
       <div className="max-w-[95rem] mx-auto">
-        
+
         <AnimatePresence mode="wait">
           {!activeMainTab ? (
             <motion.div
@@ -425,77 +428,108 @@ const JEE_MAINS = () => {
               className="space-y-8"
               key="dashboard"
             >
-              {/* Header & Search */}
-              <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
-                <div>
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                    Chemistry Dashboard
-                  </h1>
-                  <p className="text-slate-400 mt-1">Select a chapter from the categories below</p>
-                </div>
-                <div className="relative w-full md:w-96">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
-                  <Input 
-                    placeholder="Search chapters..." 
-                    className="pl-10 bg-slate-900 border-slate-800 focus:border-blue-500 transition-colors"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-              </div>
+              {/* Header & Search - UPDATED WITH SUBJECT TABS */}
+              <div className="flex flex-col gap-6 mb-8">
+                <div className="flex flex-col items-center justify-center text-center gap-6">
+                  <div>
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                      NEET Success Dashboard
+                    </h1>
+                    <p className="text-slate-400 mt-1">Select a subject and chapter to access resources</p>
+                  </div>
 
-              {/* 4-COLUMN CATEGORY GRID */}
-              <ScrollArea className="h-[75vh] pr-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 pb-12">
-                  
-                  {Object.entries(groupedChapters).map(([category, chapters], catIdx) => {
-                    const style = getCategoryStyle(category);
-                    
-                    // Filter chapters within this category
-                    const filteredChapters = chapters.filter(c => 
-                      c.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-
-                    // If searching and no matches in this category, hide it
-                    if (searchTerm && filteredChapters.length === 0) return null;
-
-                    return (
-                      <motion.div
-                        key={category}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: catIdx * 0.1 }}
-                        className="flex flex-col h-full bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden"
+                  {/* Subject Tabs */}
+                  <div className="flex bg-slate-900/50 p-1 rounded-xl border border-slate-800">
+                    {["Chemistry", "Physics", "Botany", "Zoology"].map((subject) => (
+                      <button
+                        key={subject}
+                        onClick={() => setActiveSubject(subject)}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeSubject === subject
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
+                          : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+                          }`}
                       >
-                        {/* Category Header */}
-                        <div className={`p-4 border-b border-slate-800 flex items-center gap-3 ${style.bg}`}>
-                          <div className={`p-2 rounded-lg bg-slate-950 ${style.color}`}>
-                            {style.icon}
-                          </div>
-                          <h3 className={`font-bold text-lg ${style.color}`}>{category}</h3>
-                        </div>
-
-                        {/* Chapter List */}
-                        <div className="p-3 grid gap-2">
-                          {filteredChapters.map((chapter) => (
-                            <div
-                              key={chapter}
-                              onClick={() => setActiveMainTab(chapter)}
-                              className="group flex items-center justify-between p-3 rounded-lg hover:bg-slate-800 border border-transparent hover:border-slate-700 cursor-pointer transition-all"
-                            >
-                              <span className="text-sm font-medium text-slate-300 group-hover:text-white truncate">
-                                {chapter}
-                              </span>
-                              <ChevronLeft className="w-4 h-4 text-slate-600 group-hover:text-blue-400 rotate-180 opacity-0 group-hover:opacity-100 transition-all" />
-                            </div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-
+                        {subject === "Chemistry" && <FlaskConical className="w-4 h-4" />}
+                        {subject === "Physics" && <Zap className="w-4 h-4" />}
+                        {subject === "Botany" && <Leaf className="w-4 h-4" />}
+                        {subject === "Zoology" && <Dna className="w-4 h-4" />}
+                        <span className="hidden sm:inline">{subject}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </ScrollArea>
+
+                {activeSubject === "Chemistry" ? (
+                  <div className="flex flex-col gap-6">
+
+
+                    {/* 4-COLUMN CATEGORY GRID */}
+                    <ScrollArea className="h-[65vh] pr-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 pb-12">
+
+                        {Object.entries(groupedChapters).map(([category, chapters], catIdx) => {
+                          const style = getCategoryStyle(category);
+
+                          // Filter chapters within this category
+                          const filteredChapters = chapters;
+
+                          return (
+                            <motion.div
+                              key={category}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: catIdx * 0.1 }}
+                              className="flex flex-col h-full bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden"
+                            >
+                              {/* Category Header */}
+                              <div className={`p-4 border-b border-slate-800 flex items-center gap-3 ${style.bg}`}>
+                                <div className={`p-2 rounded-lg bg-slate-950 ${style.color}`}>
+                                  {style.icon}
+                                </div>
+                                <h3 className={`font-bold text-lg ${style.color}`}>{category}</h3>
+                              </div>
+
+                              {/* Chapter List */}
+                              <div className="p-3 grid gap-2">
+                                {filteredChapters.map((chapter) => (
+                                  <div
+                                    key={chapter}
+                                    onClick={() => setActiveMainTab(chapter)}
+                                    className="group flex items-center justify-between p-3 rounded-lg hover:bg-slate-800 border border-transparent hover:border-slate-700 cursor-pointer transition-all"
+                                  >
+                                    <span className="text-sm font-medium text-slate-300 group-hover:text-white truncate">
+                                      {chapter}
+                                    </span>
+                                    <ChevronLeft className="w-4 h-4 text-slate-600 group-hover:text-blue-400 rotate-180 opacity-0 group-hover:opacity-100 transition-all" />
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+
+                      </div>
+                    </ScrollArea>
+                  </div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center justify-center h-[50vh] text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/30"
+                  >
+                    <div className="p-4 rounded-full bg-slate-800 mb-4 text-slate-400">
+                      {activeSubject === "Physics" && <Zap className="w-8 h-8" />}
+                      {activeSubject === "Botany" && <Leaf className="w-8 h-8" />}
+                      {activeSubject === "Zoology" && <Dna className="w-8 h-8" />}
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-200 mb-2">{activeSubject} Coming Soon</h3>
+                    <p className="text-slate-400 max-w-md">
+                      We are currently curating high-quality {activeSubject.toLowerCase()} content for you.
+                      Check back later for updates!
+                    </p>
+                  </motion.div>
+                )}
+              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -507,7 +541,7 @@ const JEE_MAINS = () => {
             >
               {/* Detail Header */}
               <div className="flex items-center gap-4 border-b border-slate-800 pb-6">
-                <Button 
+                <Button
                   onClick={() => setActiveMainTab(null)}
                   variant="outline"
                   size="icon"
@@ -526,26 +560,25 @@ const JEE_MAINS = () => {
                 <div className="pb-12 max-w-[95rem] mx-auto">
                   {activeMainTab === "IMPORTANT BOOK" ? (
                     <div className="space-y-8">
-                        {/* 4 Column Layout for Important Books */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                          {["Physical", "Organic", "Inorganic", "Other"].map((category) => (
-                            <div key={category} className="bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col h-full hover:border-slate-700 transition-colors">
-                              <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 pb-2 border-b border-slate-800 ${
-                                category === 'Physical' ? 'text-blue-400' : 
-                                category === 'Organic' ? 'text-emerald-400' : 
+                      {/* 4 Column Layout for Important Books */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                        {["Physical", "Organic", "Inorganic", "Other"].map((category) => (
+                          <div key={category} className="bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col h-full hover:border-slate-700 transition-colors">
+                            <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 pb-2 border-b border-slate-800 ${category === 'Physical' ? 'text-blue-400' :
+                              category === 'Organic' ? 'text-emerald-400' :
                                 category === 'Inorganic' ? 'text-purple-400' : 'text-amber-400'
                               }`}>
-                                <Layers className="w-5 h-5" />
-                                {category} Books
-                              </h3>
-                              <ResourceList items={importantBooks[category]} compact={true} />
-                            </div>
-                          ))}
-                        </div>
+                              <Layers className="w-5 h-5" />
+                              {category} Books
+                            </h3>
+                            <ResourceList items={importantBooks[category]} compact={true} />
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ) : pdfData[activeMainTab] ? (
                     <div className="max-w-4xl mx-auto">
-                        <ResourceList items={pdfData[activeMainTab]} />
+                      <ResourceList items={pdfData[activeMainTab]} />
                     </div>
                   ) : (
                     <div className="flex flex-col items-center justify-center py-20 text-slate-500">
@@ -566,4 +599,4 @@ const JEE_MAINS = () => {
   );
 };
 
-export default JEE_MAINS;
+export default NEET;

@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 import Photo1 from "@/components/Photo1";
 import { FiDownload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/Card";
+import { Card, CardContent } from "@/components/ui/card";
 
 
 
 const about = {
-  
+
   title: "About Me",
   description:
     "My teaching methodology focuses on strong fundamentals, analytical thinking, and practical application of concepts to help students achieve their academic and career goals.",
@@ -50,9 +50,9 @@ const experience = {
   icon: "/assets/resume/badge.svg",
   title: "My Experience",
   description:
-   "Senior Chemistry Educator with over 9 years of Experience in mentoring students for NATIONAL & STATE LEVEL competitive exams like IIT-JEE (Mains & Advanced)| NEET| CUET| Boards| KVPY| Olympiads and various other national and international examinations. I have guided numerous students from India and abroad to excel in their respective exams through in-depth subject knowledge with a strategic approach conceptual clarity, problem-solving techniques, and result-oriented mentorship. Passionate about making Chemistry easy and interesting.",
-  
-items: [
+    "Senior Chemistry Educator with over 9 years of Experience in mentoring students for NATIONAL & STATE LEVEL competitive exams like IIT-JEE (Mains & Advanced)| NEET| CUET| Boards| KVPY| Olympiads and various other national and international examinations. I have guided numerous students from India and abroad to excel in their respective exams through in-depth subject knowledge with a strategic approach conceptual clarity, problem-solving techniques, and result-oriented mentorship. Passionate about making Chemistry easy and interesting.",
+
+  items: [
     {
       company: "Aakash Institute, Bhubaneswar",
       position: "Senior Chemistry Lecturer",
@@ -120,7 +120,7 @@ const students = [
     photo: "https://via.placeholder.com/150",
     year: 2024,
 
-  }, 
+  },
   {
     name: "Sayan Rath",
     rank: 99.16,
@@ -167,7 +167,7 @@ const students = [
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
+
   },
   {
     name: "Suryans Dash",
@@ -175,49 +175,49 @@ const students = [
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
-  },  {
+
+  }, {
     name: "Subhrajit Giri",
     rank: 97.04,
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
-  },  {
+
+  }, {
     name: "Aditya A Mohanta",
     rank: 97.56,
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
-  },  {
+
+  }, {
     name: "Aditya A Mohanta",
     rank: 97.56,
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
-  },  {
+
+  }, {
     name: "Aditya A Mohanta",
     rank: 97.56,
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
-  },  {
+
+  }, {
     name: "Aditya A Mohanta",
     rank: 97.56,
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
-  },  {
+
+  }, {
     name: "Aditya A Mohanta",
     rank: 97.56,
     department: "JEE MAINS",
     photo: "https://via.placeholder.com/150",
     year: 2024,
-    
+
   },
 ];
 
@@ -254,7 +254,7 @@ const StudentResults = () => {
 const Gallery = () => {
   const images = [
     "/assets/gallery/photo1.jpg",
-    "/assets/gallery/photo2.jpg",,
+    "/assets/gallery/photo2.jpg", ,
     "/assets/gallery/photo3.jpg",
     "/assets/gallery/photo4.jpg",
     "/assets/gallery/photo5.jpg",
@@ -302,7 +302,7 @@ const Resume = () => {
         transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
       }}
 
-      
+
       className="min-h-[80vh] flex items-center justyfy-center py-12 xl:py-0"
     >
       <div className="container mx-auto">
@@ -325,7 +325,7 @@ const Resume = () => {
                 </Button>
               </a>
             </div>
-            
+
 
 
           </TabsList>
@@ -361,7 +361,7 @@ const Resume = () => {
                 </ScrollArea>
               </div>
               <div className="absolute top-40 right-4 w-[27%]">
-              <Photo1 />
+                <Photo1 />
               </div>
             </TabsContent>
             <TabsContent value="education" className="w-full">
@@ -395,7 +395,7 @@ const Resume = () => {
                 </ScrollArea>
               </div>
               <div className="absolute top-40 right-4 w-[27%]">
-              <Photo1 />
+                <Photo1 />
               </div>
             </TabsContent>
             <TabsContent value="results" className="w-full">
@@ -427,7 +427,7 @@ const Resume = () => {
                 </ul>
               </div>
               <div className="absolute top-40 right-4 w-[27%]">
-              <Photo1 />
+                <Photo1 />
               </div>
             </TabsContent>
             <TabsContent value="Gallery" className="w-full">

@@ -41,32 +41,32 @@ const Home = () => {
       <div className="container mx-auto flex-1">
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-10">
           <div className="text-center xl:text-left order-2 xl:order-none">
-            <span className="text-xl">KOTA'S EXPERIENCED </span>
-            <h1 className="text-6xl">
+            <span className="text-lg xl:text-xl">KOTA'S EXPERIENCED </span>
+            <h1 className="text-4xl md:text-5xl xl:text-6xl font-semibold mb-6">
               CHEMISTRY MENTOR <br />
-              <span className="h1 text-accent">VIKASH KUMAR</span>
+              <span className="text-accent">VIKASH KUMAR</span>
             </h1>
-            <span className="text-yellow-500 text-lg">
+            <span className="text-yellow-500 text-lg block mb-4">
               Passionate about making Chemistry easy and interesting.
             </span>
 
-            <p className="max-w-[500px] mb-2 pb-5 text-white/80">
+            <p className="max-w-[500px] mb-6 text-white/80 mx-auto xl:mx-0">
               SENIOR CHEMISTRY LECTURER WITH 10+ YRS OF EXPERIENCE
             </p>
 
             {/* Exam Buttons */}
             <div className="grid w-full gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              <a href="/JEE_ADVANCE">
+              <a href="/jeeadvancechemistry">
                 <Button variant="outline" size="lg">
                   JEE Advance
                 </Button>
               </a>
-              <a href="/JEE_MAINS">
+              <a href="/jeemainschemistry">
                 <Button variant="outline" size="lg">
                   JEE Mains
                 </Button>
               </a>
-              <a href="/NEET">
+              <a href="/neetchemistry">
                 <Button variant="outline" size="lg">
                   NEET
                 </Button>
@@ -114,7 +114,7 @@ const Home = () => {
       {/* Footer Section */}
       <footer className="bg-gray-800 px-4 pt-6 pb-4 text-center w-full">
         <p className="text-white text-lg font-semibold mb-4">Contact us</p>
-        <div className="p-6 rounded-lg shadow-lg w-full">
+        <div className="p-4 sm:p-6 rounded-lg shadow-lg w-full">
           <div className="flex flex-col md:flex-row items-center gap-4">
             {/* Social Links */}
             <div className="flex flex-col xl:flex-row items-center">
@@ -124,24 +124,24 @@ const Home = () => {
               />
             </div>
 
-            <a href="tel:+918457876843">
+            <a href="tel:+918457876843" className="w-full md:w-auto">
               <Button
                 variant="outline"
                 size="lg"
-                className="flex text-white/80 items-center gap-2"
+                className="flex text-white/80 items-center gap-2 w-full md:w-auto text-sm sm:text-base"
               >
-                <IoIosCall className="text-l text-accent" />
+                <IoIosCall className="text-l text-accent flex-shrink-0" />
                 <span>+91 8457876843</span>
               </Button>
             </a>
 
-            <a href="mailto:itsvikash143@gmail.com">
+            <a href="mailto:itsvikash143@gmail.com" className="w-full md:w-auto">
               <Button
                 variant="outline"
                 size="lg"
-                className="flex text-white/80 items-center gap-2"
+                className="flex text-white/80 items-center gap-2 w-full md:w-auto text-sm sm:text-base"
               >
-                <SiGmail className="text-l text-accent" />
+                <SiGmail className="text-l text-accent flex-shrink-0" />
                 <span>itsvikash143@gmail.com</span>
               </Button>
             </a>
@@ -150,13 +150,14 @@ const Home = () => {
               href="https://www.google.com/maps?q=plot+no+125,+Aakash+Institute,+Bhubaneswar,+Odisha,+751016"
               target="_blank"
               rel="noopener noreferrer"
+              className="w-full md:w-auto"
             >
               <Button
                 variant="outline"
                 size="lg"
-                className="flex text-white/80 items-center gap-2"
+                className="flex text-white/80 items-center gap-2 w-full md:w-auto text-sm sm:text-base h-auto py-2 whitespace-normal text-left"
               >
-                <FaLocationDot className="text-l text-accent" />
+                <FaLocationDot className="text-l text-accent flex-shrink-0" />
                 <span>
                   Plot No. 125, Aakash Institute, Bhubaneswar, Odisha
                 </span>

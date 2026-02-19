@@ -11,16 +11,20 @@ const links = [
 
   // {
   //   name: "JEE ADVANCE",
-  //   path: "/JEE_ADVANCE",
+  //   path: "/jeeadvancechemistry",
   // },
-  
+
   {
     name: "JEE",
-    path: "/JEE_MAINS",
+    path: "/jeemainschemistry",
   },
   {
     name: "NEET",
-    path: "/NEET",
+    path: "/neetchemistry",
+  },
+  {
+    name: "TEST SERIES",
+    path: "/test-series",
   },
 
   {
@@ -48,9 +52,8 @@ const Nav = () => {
           <Link
             href={link.path}
             key={index}
-            className={`${
-              link.path === pathname && "text-accent border-b-2 border-accent "
-            } capitalize front-medium hover:text-accent transition-all`}
+            className={`${link.path === pathname && "text-accent border-b-2 border-accent "
+              } capitalize front-medium hover:text-accent transition-all`}
           >
             {link.name}
           </Link>
