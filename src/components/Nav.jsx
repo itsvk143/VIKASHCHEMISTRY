@@ -24,7 +24,7 @@ const links = [
   },
   {
     name: "TEST SERIES",
-    path: "/test-series",
+    path: "https://testseries-nine.vercel.app/",
   },
 
   {

@@ -10,7 +10,7 @@ const links = [
   { name: "JEE ADVANCE", path: "/jeeadvancechemistry" },
   { name: "JEE MAINS", path: "/jeemainschemistry" },
   { name: "NEET", path: "/neetchemistry" },
-  { name: "TEST SERIES", path: "/test-series" },
+  { name: "TEST SERIES", path: "https://testseries-nine.vercel.app/" },
   { name: "RESUME", path: "/resume" },
   { name: "CONTACT", path: "/contact" },
   {
