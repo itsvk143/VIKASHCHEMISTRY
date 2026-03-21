@@ -21,12 +21,12 @@ const TestSeriesPage = () => {
                         <Construction className="w-12 h-12 text-blue-500" />
                     </div>
                 </div>
-                <h1 className="text-3xl font-bold text-slate-900 mb-3">Redirecting to Test Series...</h1>
+                <h1 className="text-3xl font-bold text-slate-900 mb-3">Redirecting to TESTSERIES...</h1>
                 <p className="text-slate-600 mb-8">
-                    Please wait while we transfer you to our comprehensive test series for JEE and NEET aspirants.
+                    Please wait while we transfer you to our comprehensive TESTSERIES for JEE and NEET aspirants.
                 </p>
                 <a href="https://testseries-nine.vercel.app/">
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Go to Test Series manually</Button>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Go to TESTSERIES manually</Button>
                 </a>
             </div>
         </div>
