@@ -23,7 +23,7 @@ const links = [
     path: "/neetchemistry",
   },
   {
-    name: "TEST SERIES",
+    name: "TESTSERIES",
     path: "https://testseries-nine.vercel.app/",
   },
 
