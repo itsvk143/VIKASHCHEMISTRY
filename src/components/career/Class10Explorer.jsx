@@ -244,14 +244,21 @@ export default function Class10Explorer() {
                     </div>
                   </div>
 
-                  {/* Future Careers */}
+                  {/* Future Careers & Clickable Action */}
                   <div className="pt-4 border-t border-white/10">
                     <span className="text-[11px] uppercase font-bold text-accent tracking-wider block mb-1">
                       Future Career Roles
                     </span>
-                    <p className="text-xs text-white font-semibold">
+                    <p className="text-xs text-white font-semibold mb-3">
                       {opt.futureCareers}
                     </p>
+                    <a
+                      href="#after-12"
+                      className="inline-flex items-center gap-1.5 text-xs text-accent hover:text-accent-hover font-bold transition-all group-hover:translate-x-1"
+                    >
+                      <span>Explore Higher Degree &amp; Entrance Pathways</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
                   </div>
                 </div>
               ))}

@@ -23,10 +23,26 @@ import {
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { careersData } from "@/data/career/careersData";
 
-export default function CareerDetailModal({ career, isOpen, onClose }) {
+export default function CareerDetailModal({ career: careerProp, careerId, isOpen = true, onClose }) {
   const [copied, setCopied] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
+
+  // Resolve career whether object or string ID was passed
+  const career =
+    (typeof careerProp === "object" && careerProp !== null)
+      ? careerProp
+      : (typeof careerId === "object" && careerId !== null)
+      ? careerId
+      : careersData.find(
+          (c) =>
+            c.id === careerProp ||
+            c.id === careerId ||
+            (c.id === "cse-aiml" && (careerId === "cse" || careerProp === "cse")) ||
+            (c.id === "mbbs" && (careerId === "medical" || careerProp === "medical"))
+        ) ||
+        careersData[0];
 
   useEffect(() => {
     if (career?.id) {
