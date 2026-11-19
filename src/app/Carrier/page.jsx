@@ -1,158 +1,219 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import ReactFlow, { Background, Controls } from 'react-flow-renderer';
-
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  class10Nodes,
-  class10Edges,
-  class12Nodes,
-  class12Edges,
-  gradNodes,
-  gradEdges,
-  pgNodes,
-  pgEdges,
-} from './data';
+  Compass,
+  GraduationCap,
+  Briefcase,
+  Search,
+  Sparkles,
+  Award,
+  Globe,
+  Calendar,
+  Users,
+  MessageSquare,
+  HelpCircle,
+  BookOpen,
+  ArrowUp,
+  Bookmark,
+  Share2,
+} from 'lucide-react';
 
-/* ---------------------------------------------------------
-  UTILS: create styled node objects for ReactFlow
---------------------------------------------------------- */
-function makeNode(node, setMode, currentMode) {
-  const isTop = node.id.startsWith('top');
+// Career Components
+import CareerHero from '@/components/career/CareerHero';
+import EducationTimeline from '@/components/career/EducationTimeline';
+import Class10Explorer from '@/components/career/Class10Explorer';
+import Class12Explorer from '@/components/career/Class12Explorer';
+import CareerRoadmap from '@/components/career/CareerRoadmap';
+import GovernmentJobsExplorer from '@/components/career/GovernmentJobsExplorer';
+import ScholarshipCentre from '@/components/career/ScholarshipCentre';
+import StudyAbroadCentre from '@/components/career/StudyAbroadCentre';
+import InteractiveCareerFinder from '@/components/career/InteractiveCareerFinder';
+import CareerComparison from '@/components/career/CareerComparison';
+import ExamCalendar from '@/components/career/ExamCalendar';
+import ParentGuide from '@/components/career/ParentGuide';
+import CounsellingEnquiry from '@/components/career/CounsellingEnquiry';
+import CareerDetailModal from '@/components/career/CareerDetailModal';
 
-  // Highlight active top node
-  const isActiveTop =
-    (node.id === 'top10' && currentMode === 'class10') ||
-    (node.id === 'top12' && currentMode === 'class12') ||
-    (node.id === 'topGrad' && currentMode === 'graduation') ||
-    (node.id === 'topPG' && currentMode === 'postgrad');
+// Data
+import { CAREERS_DATABASE } from '@/data/career/careersData';
 
-  return {
-    id: node.id,
-    position: node.position,
-    data: {
-      label: (
-        <div
-          onClick={() => {
-            if (isTop) {
-              if (node.id === 'top10') setMode('class10');
-              if (node.id === 'top12') setMode('class12');
-              if (node.id === 'topGrad') setMode('graduation');
-              if (node.id === 'topPG') setMode('postgrad');
-            }
-          }}
-          className={`
-            cursor-pointer flex flex-col items-center justify-center h-full w-full
-            ${isTop ? 'hover:scale-105 transition-transform duration-200' : ''}
-          `}
-        >
-          {node.link ? (
-            <a
-              href={node.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`
-                font-bold underline-offset-2 hover:underline
-                ${isActiveTop ? 'text-primary' : 'text-accent hover:text-white'}
-              `}
-            >
-              {node.label}
-            </a>
-          ) : (
-            <span className={`font-semibold ${isActiveTop ? 'text-primary' : 'text-white'}`}>
-              {node.label}
-            </span>
-          )}
-        </div>
-      ),
-    },
-    style: {
-      // Dark Theme Styling for Nodes (Requested: "Only boxes should be dark")
-      background: isActiveTop ? '#00ff99' : '#1c1c22',
-      color: isActiveTop ? '#1c1c22' : '#ffffff',
-      padding: '12px',
-      borderRadius: '8px',
-      border: isActiveTop ? '2px solid #00ff99' : '1px solid #00ff99', // Keep accent border for consistency
-      textAlign: 'center',
-      whiteSpace: 'pre-wrap',
-      minWidth: 160,
-      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-      fontSize: '14px',
-      fontFamily: 'var(--font-primary)',
-    },
+const SUB_NAV_LINKS = [
+  { id: 'timeline', label: 'Timeline' },
+  { id: 'after-10', label: 'After 10th' },
+  { id: 'after-12', label: 'After 12th' },
+  { id: 'roadmap', label: 'Visual Roadmap' },
+  { id: 'govt-jobs', label: 'Govt Exams' },
+  { id: 'scholarships', label: 'Scholarships' },
+  { id: 'study-abroad', label: 'Study Abroad' },
+  { id: 'career-finder', label: 'Career Finder' },
+  { id: 'comparisons', label: 'Compare' },
+  { id: 'exam-calendar', label: '2025 Calendar' },
+  { id: 'parent-guide', label: 'Parents' },
+  { id: 'counselling', label: '1-on-1 Counselling' },
+];
+
+export default function CareerPage() {
+  const [selectedCareerId, setSelectedCareerId] = useState(null);
+  const [activeNav, setActiveNav] = useState('timeline');
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+
+  // Monitor scroll for sticky nav highlight and scroll to top button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleSelectCareer = (careerId) => {
+    setSelectedCareerId(careerId);
   };
-}
 
-const Carrier = () => {
-  const [mode, setMode] = useState('class12');
+  const handleCloseModal = () => {
+    setSelectedCareerId(null);
+  };
 
-  const activeNodes = useMemo(() => {
-    switch (mode) {
-      case 'class10': return class10Nodes;
-      case 'class12': return class12Nodes;
-      case 'graduation': return gradNodes;
-      case 'postgrad': return pgNodes;
-      default: return class12Nodes;
+  const handleSharePortal = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: 'CVK Sir - Interactive Career Guidance Portal',
+          text: 'Explore 100+ career options, entrance exams, and scholarships after Class 10, 12, and Graduation.',
+          url: window.location.href,
+        })
+        .catch(() => {});
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
     }
-  }, [mode]);
+  };
 
-  const activeEdges = useMemo(() => {
-    switch (mode) {
-      case 'class10': return class10Edges;
-      case 'class12': return class12Edges;
-      case 'graduation': return gradEdges;
-      case 'postgrad': return pgEdges;
-      default: return class12Edges;
-    }
-  }, [mode]);
-
-  const nodes = useMemo(
-    () => activeNodes.map((n) => makeNode(n, setMode, mode)),
-    [activeNodes, mode]
-  );
-
-  // Edge styling - Updated for Light Background
-  const defaultEdgeOptions = {
-    type: 'smoothstep',
-    style: { stroke: '#1c1c22', strokeWidth: 2 }, // Dark primary edges for contrast on light bg
-    animated: true,
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="h-[calc(100vh-80px)] w-full flex flex-col bg-white"
-    >
-      {/* Flowchart Area - Light CSS Background */}
-      <div className="flex-grow bg-slate-50 relative overflow-hidden">
-        {/* Dynamic Title Overlay */}
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary uppercase tracking-wide">
-            {mode === 'class10' && 'Career Pathway for Class 10'}
-            {mode === 'class12' && 'Career Pathway for Class 12'}
-            {mode === 'graduation' && 'Career Pathway for Graduation'}
-            {mode === 'postgrad' && 'Career Pathway for Post-Graduation'}
-          </h2>
+    <div className="min-h-screen bg-primary text-white selection:bg-accent selection:text-primary">
+      {/* 1. Hero Section */}
+      <CareerHero onSelectCareer={handleSelectCareer} />
+
+      {/* 2. Sticky Sub-Navigation Bar */}
+      <div className="sticky top-0 z-30 bg-[#1c1c22]/95 backdrop-blur-md border-y border-white/10 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 overflow-x-auto py-3 no-scrollbar">
+          <div className="flex items-center gap-1 sm:gap-2 flex-nowrap">
+            {SUB_NAV_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => setActiveNav(link.id)}
+                className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+                  activeNav === link.id
+                    ? 'bg-accent text-primary shadow-sm'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <button
+              onClick={handleSharePortal}
+              title="Share Portal Link"
+              className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 hover:text-white text-xs font-medium flex items-center gap-1.5 transition-all"
+            >
+              <Share2 className="w-3.5 h-3.5 text-accent" />
+              <span className="hidden sm:inline">{isCopied ? 'Link Copied!' : 'Share'}</span>
+            </button>
+            <a
+              href="#counselling"
+              className="px-3.5 py-1.5 rounded-full bg-accent hover:bg-accent-hover text-primary font-bold text-xs uppercase tracking-wide transition-all shadow-md shadow-accent/20"
+            >
+              Book Guidance
+            </a>
+          </div>
         </div>
-
-        <ReactFlow
-          nodes={nodes}
-          edges={activeEdges}
-          defaultEdgeOptions={defaultEdgeOptions}
-          fitView
-          attributionPosition="bottom-right"
-          className="w-full h-full"
-        >
-          {/* Light Dots Background */}
-          <Background color="#ccc" gap={20} size={1} />
-          {/* Dark Controls for contrast */}
-          <Controls className="!bg-[#27272c] !border-gray-200 [&>button]:!fill-white [&>button]:!border-white/10 hover:[&>button]:!bg-accent hover:[&>button]:!fill-primary" />
-        </ReactFlow>
       </div>
-    </motion.div>
-  );
-};
 
-export default Carrier;
+      {/* 3. Education Journey Timeline */}
+      <EducationTimeline onSelectCareer={handleSelectCareer} />
+
+      {/* 4. Career Exploration After Class 10 */}
+      <Class10Explorer onSelectCareer={handleSelectCareer} />
+
+      {/* 5. Career Exploration After Class 12 */}
+      <Class12Explorer onSelectCareer={handleSelectCareer} />
+
+      {/* 6. Interactive Visual Career Roadmap */}
+      <CareerRoadmap onSelectCareer={handleSelectCareer} />
+
+      {/* 7. Government Jobs & Competitive Examinations Portal */}
+      <div id="govt-jobs">
+        <GovernmentJobsExplorer />
+      </div>
+
+      {/* 8. Scholarship Discovery Centre */}
+      <div id="scholarships">
+        <ScholarshipCentre />
+      </div>
+
+      {/* 9. Study Abroad Centre */}
+      <div id="study-abroad">
+        <StudyAbroadCentre />
+      </div>
+
+      {/* 10. Interactive 6-Step Career Finder Assessment */}
+      <InteractiveCareerFinder onSelectCareer={handleSelectCareer} />
+
+      {/* 11. Side-by-Side Career Comparison Tool */}
+      <CareerComparison onSelectCareer={handleSelectCareer} />
+
+      {/* 12. National Entrance Examination Calendar 2025-26 */}
+      <ExamCalendar />
+
+      {/* 13. Parent Guidance Dashboard */}
+      <ParentGuide />
+
+      {/* 14. 1-on-1 Career Counselling Booking Form */}
+      <CounsellingEnquiry />
+
+      {/* 15. Career Deep-Dive Modal Drawer */}
+      <AnimatePresence>
+        {selectedCareerId && (
+          <CareerDetailModal
+            careerId={selectedCareerId}
+            onClose={handleCloseModal}
+            onSelectCareer={handleSelectCareer}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Floating Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            onClick={scrollToTop}
+            className="fixed bottom-24 right-6 z-30 p-3 rounded-full bg-accent hover:bg-accent-hover text-primary font-bold shadow-xl transition-all hover:scale-105"
+            title="Scroll to Top"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
