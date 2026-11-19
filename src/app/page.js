@@ -7,35 +7,9 @@ import { Button } from "@/components/ui/button";
 import { IoIosCall } from "react-icons/io";
 import { SiGmail } from "react-icons/si";
 import { FaLocationDot } from "react-icons/fa6";
-
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Home = () => {
-  const router = useRouter();
-  const endRef = useRef(null);
-  const [triggered, setTriggered] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !triggered) {
-          setTriggered(true);
-
-          // Delay is optional (gives a smoother feel)
-          setTimeout(() => {
-            router.push("/resume"); // Navigate to Resume page
-          }, 600);
-        }
-      },
-      { threshold: 1 } // Element must be fully visible
-    );
-
-    if (endRef.current) observer.observe(endRef.current);
-
-    return () => observer.disconnect();
-  }, [triggered, router]);
-
   return (
     <section className="min-h-screen bg-black text-white flex flex-col justify-between">
       <div className="container mx-auto flex-1">
@@ -111,11 +85,16 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Stats Section */}
+      <div className="bg-black w-full my-6">
+        <Stats />
+      </div>
+
       {/* Footer Section */}
-      <footer className="bg-gray-800 px-4 pt-6 pb-4 text-center w-full">
+      <footer className="bg-gray-800 px-4 pt-8 pb-6 text-center w-full">
         <p className="text-white text-lg font-semibold mb-4">Contact us</p>
-        <div className="p-4 sm:p-6 rounded-lg shadow-lg w-full">
-          <div className="flex flex-col md:flex-row items-center gap-4">
+        <div className="p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             {/* Social Links */}
             <div className="flex flex-col xl:flex-row items-center">
               <Social
@@ -147,7 +126,7 @@ const Home = () => {
             </a>
 
             <a
-              href="https://www.google.com/maps?q=plot+no+125,+Aakash+Institute,+Bhubaneswar,+Odisha,+751016"
+              href="https://www.google.com/maps?q=Plot+No.+125,+Chandrasekharpur,+Bhubaneswar,+Odisha,+751016"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full md:w-auto"
@@ -159,20 +138,32 @@ const Home = () => {
               >
                 <FaLocationDot className="text-l text-accent flex-shrink-0" />
                 <span>
-                  Plot No. 125, Aakash Institute, Bhubaneswar, Odisha
+                  Plot No. 125, Chandrasekharpur, Bhubaneswar, Odisha
                 </span>
               </Button>
             </a>
           </div>
+
+          {/* Footer Bottom Links & Privacy Policy */}
+          <div className="mt-8 pt-4 border-t border-gray-700 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-sm text-white/60 gap-3">
+            <p>© {new Date().getFullYear()} CVK Sir (Vikash Kumar). All rights reserved.</p>
+            <div className="flex items-center gap-6">
+              <Link
+                href="/privacy-policy"
+                className="text-accent hover:underline font-medium transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/contact"
+                className="hover:text-accent font-medium transition-colors"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
         </div>
       </footer>
-
-      <div className="bg-black w-full">
-        <Stats />
-      </div>
-
-      {/* 👇 Auto-scroll trigger (when visible → go to Resume page) */}
-      <div ref={endRef} className="h-1"></div>
     </section>
   );
 };

@@ -34,7 +34,7 @@ const contactInfo = [
   {
     icon: <FaMapMarkedAlt />,
     title: "Address",
-    description: "Plot No. 125, Aakash Institute, Chandrashekharpur, Bhubaneswar, 751016",
+    description: "Plot No. 125, Chandrasekharpur, Bhubaneswar, Odisha, 751016",
   },
 ];
 
