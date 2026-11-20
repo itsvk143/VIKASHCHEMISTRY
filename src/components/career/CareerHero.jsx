@@ -149,7 +149,7 @@ export default function CareerHero({ onSelectCareer }) {
             )}
           </div>
 
-          {/* Three Interactive Jump Buttons */}
+          {/* Interactive Jump Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8">
             <a href="#after-10">
               <Button
@@ -168,7 +168,18 @@ export default function CareerHero({ onSelectCareer }) {
                 className="bg-accent text-primary font-bold hover:bg-accent-hover rounded-xl text-xs sm:text-sm px-6 py-6 shadow-lg shadow-accent/20 flex items-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
-                Explore After Class 12 (PCM / PCB / Commerce / Arts)
+                Explore After Class 12
+              </Button>
+            </a>
+
+            <a href="#roadmap">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-accent/60 bg-accent/10 text-accent hover:bg-accent hover:text-primary rounded-xl font-bold text-xs sm:text-sm px-5 py-6 flex items-center gap-2 shadow-md shadow-accent/10 transition-all"
+              >
+                <Compass className="w-4 h-4" />
+                Connected Flowchart
               </Button>
             </a>
 

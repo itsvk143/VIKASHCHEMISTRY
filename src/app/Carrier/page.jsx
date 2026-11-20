@@ -44,7 +44,7 @@ const SUB_NAV_LINKS = [
   { id: 'timeline', label: 'Timeline' },
   { id: 'after-10', label: 'After 10th' },
   { id: 'after-12', label: 'After 12th' },
-  { id: 'roadmap', label: 'Visual Roadmap' },
+  { id: 'roadmap', label: 'Collapsible Flowchart' },
   { id: 'govt-jobs', label: 'Govt Exams' },
   { id: 'scholarships', label: 'Scholarships' },
   { id: 'study-abroad', label: 'Study Abroad' },
