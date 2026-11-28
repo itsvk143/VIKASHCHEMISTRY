@@ -63,8 +63,9 @@ export default function Header() {
                 Mentor
               </span>
             </div>
-            <span className="text-[11px] text-slate-400 font-medium hidden sm:block">
-              Premier Chemistry Faculty • IIT-JEE &amp; NEET
+            <span className="text-[10px] sm:text-[11px] text-slate-400 font-medium hidden sm:block leading-tight mt-0.5">
+              Premier Chemistry Faculty <br />
+              <span className="text-royal-400 font-semibold">IIT-JEE &amp; NEET</span>
             </span>
           </div>
         </Link>
