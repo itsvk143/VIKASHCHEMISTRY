@@ -147,7 +147,7 @@ export default function AboutSection() {
             </p>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              My mission is straightforward: give every student the exact conceptual visualization, dimensional shortcuts, and personal attention required to crack 98–99+ percentile in JEE Chemistry and 160–180 in NEET.
+              My mission is straightforward: give every student the exact conceptual visualization, dimensional shortcuts, and personal attention required to crack <strong className="text-white font-semibold">99+ percentile in JEE Chemistry</strong> and <strong className="text-white font-semibold">160–180 in NEET</strong>.
             </p>
 
             {/* Credential Timeline Items */}
