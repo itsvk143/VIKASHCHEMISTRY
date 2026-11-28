@@ -39,7 +39,7 @@ export default function HeroSection() {
             {/* Top Credential Announcement Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs sm:text-sm font-semibold shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-              <span>Admissions Open 2025–26 • Limited Batch for 1-on-1 Focus</span>
+              <span>Admissions Open 2027–28 • Limited Batch for 1-on-1, 1 to 10 Focus</span>
             </div>
 
             {/* Main Headline */}
