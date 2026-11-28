@@ -57,7 +57,11 @@ export default function HeroSection() {
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
               Stop memorizing reactions blindly. Learn Chemistry conceptually from{" "}
               <strong className="text-white font-semibold">B.Tech NIT Rourkela</strong> and{" "}
-              <strong className="text-white font-semibold">Magadh Super 30</strong> alumnus Vikash Kumar, bringing 10+ years of Kota coaching excellence (Resonance, Narayana, Aakash) straight to your preparation.
+              <strong className="text-white font-semibold">Magadh Super 30</strong> alumnus Vikash Kumar, bringing{" "}
+              <strong className="text-gold-300 font-bold px-1.5 py-0.5 rounded bg-gold-400/15 border border-gold-400/30 whitespace-nowrap">
+                10+ years
+              </strong>{" "}
+              of Kota coaching excellence (Resonance, Narayana, Aakash) straight to your preparation.
             </p>
 
             {/* 4 Core Pillars of Teaching */}
