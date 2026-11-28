@@ -23,7 +23,7 @@ export const metadata = {
     template: "%s | CVK Sir Chemistry",
   },
   description:
-    "Master Chemistry for JEE Mains, JEE Advanced & NEET UG with Vikash Kumar (CVK Sir). B.Tech NIT Rourkela, Magadh Super 30 alumnus, with 10+ years of Kota coaching excellence. 700+ JEE and 500+ NEET selections.",
+    "Master Chemistry for JEE Mains, JEE Advanced & NEET UG with Vikash Kumar (CVK Sir). B.Tech NIT Rourkela, Super 30 alumnus, with 10+ years of Kota coaching excellence. 700+ JEE and 500+ NEET selections.",
   keywords: [
     "Chemistry mentor",
     "CVK Sir",
@@ -100,7 +100,7 @@ export default function RootLayout({ children }) {
       },
       {
         "@type": "EducationalOrganization",
-        name: "Magadh Super 30",
+        name: "Super 30",
       },
     ],
     knowsAbout: [

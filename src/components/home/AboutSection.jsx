@@ -16,7 +16,7 @@ const credentials = [
   },
   {
     icon: <Sparkles className="w-5 h-5 text-gold-400" />,
-    title: "Magadh Super 30 Alumnus",
+    title: "Super 30 Alumnus",
     institution: "Super 30 Intensive IIT-JEE Training",
     year: "2010 – 2012",
     highlight: "Selected among the top 30 under-resourced meritorious scholars for rigorous problem-solving.",
@@ -143,7 +143,7 @@ export default function AboutSection() {
             </p>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Having been trained at <strong className="text-white font-semibold">Magadh Super 30</strong> and graduated with a B.Tech in Chemical Engineering from <strong className="text-white font-semibold">NIT Rourkela</strong>, I spent over a decade teaching at premier national institutes including <strong className="text-white font-semibold">Resonance (Kota)</strong>, <strong className="text-white font-semibold">Narayana</strong>, and <strong className="text-white font-semibold">Aakash Institute</strong>.
+              Having been trained at <strong className="text-white font-semibold">Super 30</strong> and graduated with a B.Tech in Chemical Engineering from <strong className="text-white font-semibold">NIT Rourkela</strong>, I spent over a decade teaching at premier national institutes including <strong className="text-white font-semibold">Resonance (Kota)</strong>, <strong className="text-white font-semibold">Narayana</strong>, and <strong className="text-white font-semibold">Aakash Institute</strong>.
             </p>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed">

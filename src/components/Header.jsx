@@ -28,7 +28,7 @@ export default function Header() {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-gold-400 font-semibold">
-              <Award className="w-3.5 h-3.5" /> NIT Rourkela (B.Tech) • Magadh Super 30 Alumnus
+              <Award className="w-3.5 h-3.5" /> NIT Rourkela (B.Tech) • Super 30 Alumnus
             </span>
             <span className="text-white/30">•</span>
             <span className="text-slate-300">10+ Years of Kota Coaching Pedigree</span>

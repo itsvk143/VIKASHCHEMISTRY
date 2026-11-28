@@ -24,7 +24,7 @@ export default function Footer() {
                   CVK <span className="text-royal-400">Sir</span>
                 </h3>
                 <span className="text-xs text-gold-400 font-semibold">
-                  NIT Rourkela • Magadh Super 30 Alum
+                  NIT Rourkela • Super 30 Alum
                 </span>
               </div>
             </Link>
