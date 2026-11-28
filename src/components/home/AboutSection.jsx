@@ -47,10 +47,22 @@ export default function AboutSection() {
       <div className="absolute bottom-10 right-0 w-80 h-80 bg-gold-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        {/* Full-Width Continuous Statement Header across Complete Screen */}
+        <div className="text-center max-w-5xl mx-auto mb-14 lg:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-600/15 border border-royal-500/30 text-royal-300 text-xs font-semibold uppercase tracking-wider mb-4">
+            <Award className="w-4 h-4 text-gold-400" /> Academic Pedigree &amp; Philosophy
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight tracking-tight">
+            Transforming Chemistry from a <span className="text-gradient-gold">Dreaded Subject</span> into Your Highest Scoring Asset
+          </h2>
+        </div>
+
+        {/* 2-Column Content Grid: Visual Profile Card + Bio Details */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: Visual Profile Card */}
-          <div className="lg:col-span-5 order-2 lg:order-1">
+          {/* Left Column: Visual Profile Card (5 cols) */}
+          <div className="lg:col-span-5">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -128,16 +140,8 @@ export default function AboutSection() {
             </motion.div>
           </div>
 
-          {/* Right Column: Bio & Philosophy */}
-          <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-600/15 border border-royal-500/30 text-royal-300 text-xs font-semibold uppercase tracking-wider">
-              <Award className="w-4 h-4 text-gold-400" /> Academic Pedigree &amp; Philosophy
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight">
-              Transforming Chemistry from a <span className="text-gradient-gold">Dreaded Subject</span> into Your Highest Scoring Asset
-            </h2>
-
+          {/* Right Column: Bio Narrative, Mission & Timeline (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
               Every year, thousands of students lose their dream engineering or medical seat not because they lack dedication, but because traditional coaching pushes <strong className="text-white font-semibold">blind memorization</strong> over conceptual intuition.
             </p>
