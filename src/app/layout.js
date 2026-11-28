@@ -126,7 +126,7 @@ export default function RootLayout({ children }) {
       "Premier IIT-JEE and NEET Chemistry coaching and career mentorship under Vikash Kumar (CVK Sir).",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Plot No. 125, Chandrasekharpur",
+      streetAddress: "Plot No. 173, Prachi Enclave, Chandrasekharpur",
       addressLocality: "Bhubaneswar",
       addressRegion: "Odisha",
       postalCode: "751016",

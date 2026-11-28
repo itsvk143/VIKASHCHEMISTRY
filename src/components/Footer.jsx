@@ -135,7 +135,7 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-gold-400 flex-shrink-0 mt-0.5" />
                 <div className="text-xs text-slate-300 leading-relaxed">
                   <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Center Location</span>
-                  Plot No. 125, Chandrasekharpur, Bhubaneswar, Odisha, 751016
+                  Plot No. 173, Prachi Enclave, Chandrasekharpur, Bhubaneswar, Odisha, 751016
                 </div>
               </div>
             </div>

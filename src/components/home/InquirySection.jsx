@@ -155,7 +155,7 @@ export default function InquirySection() {
                     Offline Coaching Center
                   </span>
                   <span className="text-xs text-slate-300 leading-snug block">
-                    Plot No. 125, Chandrasekharpur, Bhubaneswar, Odisha, 751016
+                    Plot No. 173, Prachi Enclave, Chandrasekharpur, Bhubaneswar, Odisha, 751016
                   </span>
                 </div>
               </div>

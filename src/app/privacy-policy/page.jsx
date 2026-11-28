@@ -247,7 +247,7 @@ export default function PrivacyPolicyPage() {
                     <MapPin className="w-5 h-5 text-gold-400 mt-0.5 flex-shrink-0" />
                     <div>
                       <span className="text-xs uppercase text-slate-400 block font-semibold">Classroom &amp; Registered Address</span>
-                      <span className="font-semibold text-white">Plot No. 125, Chandrasekharpur, Bhubaneswar, Odisha, 751016, India</span>
+                      <span className="font-semibold text-white">Plot No. 173, Prachi Enclave, Chandrasekharpur, Bhubaneswar, Odisha, 751016, India</span>
                     </div>
                   </div>
                 </div>
