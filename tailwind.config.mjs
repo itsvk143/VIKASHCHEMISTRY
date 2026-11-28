@@ -20,16 +20,44 @@ module.exports = {
       xl: "1200px",
     },
     fontFamily: {
-      primary: "var(---font-jetbrainsMono)",
+      sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+      heading: ["var(--font-manrope)", "system-ui", "sans-serif"],
+      primary: ["var(--font-inter)", "system-ui", "sans-serif"],
     },
 
     extend: {
-      colors:{
-        primary: "#1c1c22",
+      colors: {
+        primary: "#070D1E",
+        navy: {
+          950: "#040711",
+          900: "#070D1E",
+          850: "#0B142F",
+          800: "#0F1C3F",
+          700: "#172A5E",
+          600: "#223B7E",
+        },
+        royal: {
+          50: "#EFF6FF",
+          100: "#DBEAFE",
+          400: "#60A5FA",
+          500: "#3B82F6",
+          600: "#2563EB",
+          700: "#1D4ED8",
+          800: "#1E40AF",
+        },
+        gold: {
+          300: "#FCD34D",
+          400: "#FBBF24",
+          500: "#F59E0B",
+          600: "#D97706",
+        },
         accent: {
-          DEFAULT: "#00ff99",
-          hover:"#00e187",
-        }
+          DEFAULT: "#2563EB",
+          hover: "#1D4ED8",
+          gold: "#F59E0B",
+          cyan: "#06B6D4",
+          emerald: "#10B981",
+        },
       },
       keyframes: {
         "accordion-down": {

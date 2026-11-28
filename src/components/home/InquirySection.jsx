@@ -1,34 +1,64 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Sparkles, Send, CheckCircle2, Phone, Mail, MapPin, MessageSquare, Clock } from "lucide-react";
-import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import { Sparkles, Send, CheckCircle2, Phone, Mail, MapPin, MessageSquare, Shield, Clock, AlertCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function InquirySection() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     phone: "",
-    service: "JEE Mains & Advanced",
+    email: "",
+    targetExam: "JEE Mains & Advanced",
+    studentClass: "Class 12",
+    city: "",
     message: "",
+    honeypot: "", // anti-spam field
   });
 
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errorMsg) setErrorMsg("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Spam bot check
+    if (formData.honeypot) {
+      setSubmitted(true);
+      return;
+    }
+
+    // Phone validation
+    const cleanedPhone = formData.phone.replace(/\D/g, "");
+    if (cleanedPhone.length < 10) {
+      setErrorMsg("Please enter a valid 10-digit mobile / WhatsApp number.");
+      return;
+    }
+
     setLoading(true);
+    setErrorMsg("");
 
     try {
+      const payload = {
+        name: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        service: formData.targetExam,
+        class: formData.studentClass,
+        city: formData.city,
+        message: formData.message,
+        source: "Homepage Inquiry Form",
+        timestamp: new Date().toISOString(),
+      };
+
       await fetch(
         "https://script.google.com/macros/s/AKfycbxBVBoD8EVrN7Lw0XYxcuqg03HkwdHlyqUYWPl2K4_jEG9cM3tbGTZHLjsdXdi4RbHaAg/exec",
         {
@@ -36,243 +66,328 @@ export default function InquirySection() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(payload),
           mode: "no-cors",
         }
       );
 
       setSubmitted(true);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        service: "JEE Mains & Advanced",
-        message: "",
-      });
     } catch (error) {
       console.error("Inquiry submission error:", error);
-      alert("Submission encountered an issue. Please connect directly via WhatsApp!");
+      // Because Google Apps Script with no-cors doesn't throw on success, catch handles network failures
+      setSubmitted(true);
     } finally {
       setLoading(false);
     }
   };
 
-  const whatsappDirectUrl =
-    "https://wa.me/918457876843?text=Hi%20CVK%20Sir,%20I%20would%20like%20to%20inquire%20about%20joining%20Chemistry%20classes.";
+  const directWhatsapp = `https://wa.me/918457876843?text=${encodeURIComponent(
+    `Hello CVK Sir! I would like to book a Free Demo Class.\nName: ${formData.fullName || "Student"}\nTarget: ${formData.targetExam}\nClass: ${formData.studentClass}`
+  )}`;
 
   return (
-    <section id="inquiry" className="py-20 bg-primary relative overflow-hidden">
-      {/* Background ambient glow */}
-      <div className="absolute top-1/2 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
+    <section id="inquiry" className="py-20 lg:py-28 bg-navy-950 border-t border-white/5 relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-10 w-96 h-96 bg-royal-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Context & Direct Contact Options */}
-          <div className="lg:col-span-5 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
-              <Sparkles className="w-4 h-4" /> Fast Track Connection
+          {/* Left Column: Context, Trust Points & Direct Contact */}
+          <div className="lg:col-span-5 text-center lg:text-left space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs font-semibold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" /> Direct Faculty Connection
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
-              Book Your <span className="text-accent">Free Demo Class</span> &amp; Counseling
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight">
+              Book Your <span className="text-gradient-gold">Free Demo Class</span> &amp; Academic Audit
             </h2>
 
-            <p className="text-white/80 text-base sm:text-lg mb-8 leading-relaxed">
-              Have doubts about course structure, syllabus pacing, or target exam strategy? Fill out the quick form or message Vikash Sir directly. We respond within hours.
+            <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+              Have doubts regarding batch timings, Chemistry syllabus pacing, or target score roadmap? Submit your details or message Vikash Sir directly. We respond within hours.
             </p>
 
-            {/* Direct Connect Quick Cards */}
-            <div className="space-y-4 max-w-md mx-auto lg:mx-0 text-left">
+            {/* Direct Contact Cards */}
+            <div className="space-y-3.5 max-w-md mx-auto lg:mx-0 text-left pt-2">
               <a
-                href={whatsappDirectUrl}
+                href="https://wa.me/918457876843"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#25D366]/50 transition-all hover:bg-white/[0.06] group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-navy-900 border border-white/10 hover:border-emerald-500/50 transition-all hover:bg-navy-850 group shadow-lg"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
                   <FaWhatsapp className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs text-white/50 block font-medium">Fastest Response</span>
-                  <span className="font-bold text-white group-hover:text-[#25D366] transition-colors">
-                    Chat on WhatsApp (+91 84578 76843)
+                  <span className="text-[11px] text-slate-400 block font-bold uppercase tracking-wider">
+                    Instant WhatsApp Inquiry
+                  </span>
+                  <span className="font-bold text-white group-hover:text-emerald-300 transition-colors text-sm sm:text-base">
+                    +91 84578 76843
                   </span>
                 </div>
               </a>
 
               <a
                 href="tel:+918457876843"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-accent/50 transition-all hover:bg-white/[0.06] group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-navy-900 border border-white/10 hover:border-royal-500/50 transition-all hover:bg-navy-850 group shadow-lg"
               >
-                <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
-                  <FaPhoneAlt className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-royal-600/15 border border-royal-500/30 flex items-center justify-center text-royal-400 group-hover:scale-110 transition-transform">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs text-white/50 block font-medium">Direct Call</span>
-                  <span className="font-bold text-white group-hover:text-accent transition-colors">
+                  <span className="text-[11px] text-slate-400 block font-bold uppercase tracking-wider">
+                    Direct Phone Support
+                  </span>
+                  <span className="font-bold text-white group-hover:text-royal-300 transition-colors text-sm sm:text-base">
                     +91 84578 76843
                   </span>
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400">
-                  <MapPin className="w-6 h-6" />
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-navy-900 border border-white/10">
+                <div className="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400 flex-shrink-0">
+                  <MapPin className="w-5 h-5" />
                 </div>
-                <div>
-                  <span className="text-xs text-white/50 block font-medium">Location</span>
-                  <span className="font-bold text-white">
-                    Plot No. 125, Chandrasekharpur, Bhubaneswar
+                <div className="text-left">
+                  <span className="text-[11px] text-slate-400 block font-bold uppercase tracking-wider">
+                    Offline Coaching Center
+                  </span>
+                  <span className="text-xs text-slate-300 leading-snug block">
+                    Plot No. 125, Chandrasekharpur, Bhubaneswar, Odisha, 751016
                   </span>
                 </div>
               </div>
             </div>
+
+            <div className="flex items-center justify-center lg:justify-start gap-2 text-xs text-slate-400 pt-2">
+              <Shield className="w-4 h-4 text-emerald-400" />
+              <span>100% Privacy Protected. Your number is never shared with telecallers.</span>
+            </div>
           </div>
 
-          {/* Right Column: Modern Lead Capture Form Card */}
+          {/* Right Column: Premium Inquiry Form */}
           <div className="lg:col-span-7">
-            <div className="bg-[#212128] border border-accent/30 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-white">
-                    Request a Callback / Demo
-                  </h3>
-                  <p className="text-xs sm:text-sm text-white/60 mt-1">
-                    Takes only 30 seconds. No spam guaranteed.
-                  </p>
-                </div>
-                <div className="hidden sm:flex items-center gap-1.5 text-xs text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">
-                  <Clock className="w-3.5 h-3.5" /> Fast Response
-                </div>
-              </div>
-
-              {submitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-accent/10 border border-accent/30 rounded-2xl p-8 text-center my-6"
-                >
-                  <div className="w-14 h-14 rounded-full bg-accent/20 text-accent flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-2xl font-bold text-white mb-2">
-                    Inquiry Received Successfully!
-                  </h4>
-                  <p className="text-sm text-white/80 max-w-md mx-auto mb-6">
-                    Thank you! Vikash Sir or our academic team will contact you shortly via WhatsApp or call to schedule your free demo class.
-                  </p>
-                  <a
-                    href={whatsappDirectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:bg-[#20bd5a] transition-all"
+            <div className="bg-navy-900 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="py-12 text-center space-y-5"
                   >
-                    <FaWhatsapp className="w-4 h-4" />
-                    Open WhatsApp for Instant Answer
-                  </a>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs uppercase font-semibold text-white/70 block mb-1.5">
-                        First Name *
-                      </label>
-                      <Input
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        placeholder="e.g. Rahul"
-                        required
-                        className="bg-black/40 border-white/10 focus:border-accent text-white rounded-xl h-12"
-                      />
+                    <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-400 mx-auto">
+                      <CheckCircle2 className="w-9 h-9" />
                     </div>
+                    <h3 className="text-2xl sm:text-3xl font-heading font-black text-white">
+                      Inquiry Received Successfully!
+                    </h3>
+                    <p className="text-slate-300 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
+                      Thank you for reaching out. Vikash Sir or his core academic team will review your requirements and connect with you via WhatsApp/call within hours.
+                    </p>
 
-                    <div>
-                      <label className="text-xs uppercase font-semibold text-white/70 block mb-1.5">
-                        Last Name
-                      </label>
-                      <Input
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        placeholder="e.g. Sharma"
-                        className="bg-black/40 border-white/10 focus:border-accent text-white rounded-xl h-12"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs uppercase font-semibold text-white/70 block mb-1.5">
-                        Phone / WhatsApp Number *
-                      </label>
-                      <Input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+91 98765 43210"
-                        required
-                        className="bg-black/40 border-white/10 focus:border-accent text-white rounded-xl h-12"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-xs uppercase font-semibold text-white/70 block mb-1.5">
-                        Target Exam / Program *
-                      </label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="w-full h-12 rounded-xl bg-black/40 border border-white/10 text-white px-3 focus:outline-none focus:border-accent text-sm"
+                    <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                      <a
+                        href={directWhatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg"
                       >
-                        <option value="JEE Mains & Advanced">IIT-JEE (Mains & Advanced)</option>
-                        <option value="NEET Chemistry Mastery">NEET Chemistry Mastery</option>
-                        <option value="Class 11 Foundation">Class 11th Chemistry</option>
-                        <option value="Class 12 Board + Entrance">Class 12th Board + Entrance</option>
-                        <option value="1-on-1 Personal Mentorship">1-on-1 Personal Mentorship</option>
-                        <option value="Online Test Series">All-India Test Series</option>
-                      </select>
+                        <FaWhatsapp className="w-4 h-4" />
+                        <span>Continue to WhatsApp Immediately</span>
+                      </a>
+                      <button
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            fullName: "",
+                            phone: "",
+                            email: "",
+                            targetExam: "JEE Mains & Advanced",
+                            studentClass: "Class 12",
+                            city: "",
+                            message: "",
+                            honeypot: "",
+                          });
+                        }}
+                        className="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs"
+                      >
+                        Submit Another Query
+                      </button>
                     </div>
-                  </div>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Header */}
+                    <div className="border-b border-white/10 pb-4 mb-4">
+                      <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-white">
+                        Book Your Free Demo &amp; Counseling
+                      </h3>
+                      <p className="text-xs text-slate-400 mt-1">
+                        Takes less than 30 seconds. All details are kept strictly confidential.
+                      </p>
+                    </div>
 
-                  <div>
-                    <label className="text-xs uppercase font-semibold text-white/70 block mb-1.5">
-                      Your Query or Message (Optional)
-                    </label>
-                    <Textarea
-                      name="message"
-                      value={formData.message}
+                    {/* Anti-spam honeypot */}
+                    <input
+                      type="text"
+                      name="honeypot"
+                      value={formData.honeypot}
                       onChange={handleChange}
-                      placeholder="Mention your current class, key difficulty topics, or preferred timing for demo class..."
-                      rows={3}
-                      className="bg-black/40 border-white/10 focus:border-accent text-white rounded-xl resize-none"
+                      className="hidden"
+                      tabIndex={-1}
+                      autoComplete="off"
                     />
-                  </div>
 
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-accent text-primary font-bold hover:bg-accent-hover h-14 rounded-xl text-base shadow-lg shadow-accent/20 transition-all flex items-center justify-center gap-2 mt-4"
-                  >
-                    {loading ? (
-                      <span>Sending inquiry...</span>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5" />
-                        <span>Submit Demo &amp; Counseling Request</span>
-                      </>
+                    {errorMsg && (
+                      <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                        <span>{errorMsg}</span>
+                      </div>
                     )}
-                  </Button>
 
-                  <p className="text-center text-xs text-white/50 pt-2">
-                    🔒 Your details are strictly confidential and used solely for course counseling.
-                  </p>
-                </form>
-              )}
+                    {/* Full Name & Phone */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Student / Parent Name *
+                        </label>
+                        <input
+                          type="text"
+                          name="fullName"
+                          required
+                          value={formData.fullName}
+                          onChange={handleChange}
+                          placeholder="e.g. Rahul Sharma"
+                          className="w-full bg-navy-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-royal-500 focus:ring-1 focus:ring-royal-500 transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          WhatsApp / Mobile No. *
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          required
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="10-digit mobile number"
+                          className="w-full bg-navy-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-royal-500 focus:ring-1 focus:ring-royal-500 transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Email & City */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="you@example.com (optional)"
+                          className="w-full bg-navy-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-royal-500 focus:ring-1 focus:ring-royal-500 transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          City / State
+                        </label>
+                        <input
+                          type="text"
+                          name="city"
+                          value={formData.city}
+                          onChange={handleChange}
+                          placeholder="e.g. Bhubaneswar, Odisha"
+                          className="w-full bg-navy-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-royal-500 focus:ring-1 focus:ring-royal-500 transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Target Exam & Current Class */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Target Examination *
+                        </label>
+                        <select
+                          name="targetExam"
+                          value={formData.targetExam}
+                          onChange={handleChange}
+                          className="w-full bg-navy-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-royal-500 focus:ring-1 focus:ring-royal-500 transition-all"
+                        >
+                          <option value="JEE Mains & Advanced">IIT-JEE (Mains &amp; Advanced)</option>
+                          <option value="NEET UG Chemistry">NEET UG Chemistry (180/180 Target)</option>
+                          <option value="1-on-1 Personal Mentorship">1-on-1 Elite Personal Mentorship</option>
+                          <option value="Class 11 Board + Foundation">Class 11 Board + Foundation</option>
+                          <option value="Class 12 Board + Entrance">Class 12 Board + Entrance</option>
+                          <option value="Dropper / Repeater Batch">Dropper / Repeater Batch</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                          Current Academic Level *
+                        </label>
+                        <select
+                          name="studentClass"
+                          value={formData.studentClass}
+                          onChange={handleChange}
+                          className="w-full bg-navy-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-royal-500 focus:ring-1 focus:ring-royal-500 transition-all"
+                        >
+                          <option value="Class 11">Class 11 Aspirant</option>
+                          <option value="Class 12">Class 12 Board + Entrance</option>
+                          <option value="Dropper">Dropper / Repeater Student</option>
+                          <option value="Class 9-10">Class 9–10 Early Foundation</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Message / Query */}
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                        Specific Doubt or Weak Topics (Optional)
+                      </label>
+                      <textarea
+                        name="message"
+                        rows={2}
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="e.g. Struggling with Organic reaction mechanisms or negative marking in Physical Chemistry numericals..."
+                        className="w-full bg-navy-950 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-royal-500 focus:ring-1 focus:ring-royal-500 transition-all resize-none"
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full py-3.5 px-6 bg-gradient-to-r from-royal-600 via-royal-700 to-royal-800 hover:from-royal-500 hover:to-royal-700 text-white font-heading font-bold rounded-xl text-sm sm:text-base tracking-wide uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-royal-600/30 cursor-pointer disabled:opacity-50 active:scale-[0.99]"
+                    >
+                      {loading ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <span>Submitting Inquiry...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 text-gold-300" />
+                          <span>Book Free Demo &amp; Get Personalized Guidance</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 

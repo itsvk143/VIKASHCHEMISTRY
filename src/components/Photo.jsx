@@ -3,107 +3,107 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const Photo = () => {
+export default function Photo() {
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
-          transition: { delay: 1, duration: 0.1, ease: "easeIn" },
+          transition: { delay: 0.2, duration: 0.5, ease: "easeInOut" },
         }}
+        className="relative flex items-center justify-center"
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { delay: 2.4, duration: 0.1, ease: "easeInOut" },
-          }}
-          className="w-[290px] h-[290px] xl:w-[498px] xl:h-[450px] mix-blend-lighten absolute"
-        >
+        {/* Subtle Ambient Radial Glow */}
+        <div className="absolute w-[280px] h-[280px] xl:w-[460px] xl:h-[460px] rounded-full bg-gradient-to-tr from-royal-600/20 via-royal-400/10 to-gold-500/15 blur-2xl -z-10" />
+
+        {/* Central Portrait Container */}
+        <div className="w-[280px] h-[340px] sm:w-[320px] sm:h-[390px] xl:w-[460px] xl:h-[500px] relative z-10">
           <Image
             src="/assets/photo.png"
             priority
-            quality={100}
+            quality={95}
             fill
-            alt="Avataar"
-            className="object-contain"
+            sizes="(max-width: 768px) 300px, (max-width: 1200px) 400px, 480px"
+            alt="Vikash Kumar (CVK Sir) - Premier Chemistry Mentor"
+            className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]"
           />
-        </motion.div>
+        </div>
 
-        {/* Animated SVG with 3 circles */}
+        {/* Sophisticated Animated Concentric SVG Rings */}
         <motion.svg
-          className="w-[300px] xl:w-[506px] h-[300px] xl:h-[506px]"
+          className="w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] xl:w-[530px] xl:h-[530px] absolute inset-0 m-auto pointer-events-none"
           fill="transparent"
-          viewBox="0 0 506 506"
+          viewBox="0 0 530 530"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Circle 1 */}
+          {/* Ring 1 - Royal Blue */}
           <motion.circle
-            cx="253"
-            cy="253"
-            r="245"
-            stroke="#00ff99"
-            strokeWidth="3"
+            cx="265"
+            cy="265"
+            r="255"
+            stroke="#3B82F6"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            initial={{ strokeDasharray: "20 30 10 40" }}
+            strokeOpacity="0.45"
+            initial={{ strokeDasharray: "25 120 40 30" }}
             animate={{
-              strokeDasharray: ["30 120 50 20", "10 40 90 60", "20 200 30 30"],
+              strokeDasharray: ["35 140 60 30", "15 50 100 70", "25 220 40 40"],
               rotate: [0, 360],
             }}
             transition={{
-              duration: 4,
+              duration: 16,
               repeat: Infinity,
-              repeatType: "reverse",
+              ease: "linear",
             }}
           />
 
-          {/* Circle 2 */}
+          {/* Ring 2 - Refined Gold */}
           <motion.circle
-            cx="253"
-            cy="253"
-            r="240"
-            stroke="#00ff99"
-            strokeWidth="2"
+            cx="265"
+            cy="265"
+            r="248"
+            stroke="#F59E0B"
+            strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
-            initial={{ strokeDasharray: "15 25 35 15" }}
+            strokeOpacity="0.5"
+            initial={{ strokeDasharray: "20 40 50 20" }}
             animate={{
-              strokeDasharray: ["25 100 30 50", "15 35 80 45", "5 200 10 10"],
+              strokeDasharray: ["30 110 40 60", "20 45 90 55", "10 210 20 20"],
               rotate: [360, 0],
             }}
             transition={{
-              duration: 5,
+              duration: 20,
               repeat: Infinity,
-              repeatType: "reverse",
+              ease: "linear",
             }}
           />
 
-          {/* Circle 3 */}
+          {/* Ring 3 - Deep Navy Accent */}
           <motion.circle
-            cx="253"
-            cy="253"
-            r="235"
-            stroke="#00ff99"
+            cx="265"
+            cy="265"
+            r="240"
+            stroke="#60A5FA"
             strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"
-            initial={{ strokeDasharray: "10 20 50 20" }}
+            strokeOpacity="0.3"
+            initial={{ strokeDasharray: "15 30 60 25" }}
             animate={{
-              strokeDasharray: ["40 140 60 20", "20 50 100 40", "15 250 25 25"],
-              rotate: [-180, 180],
+              strokeDasharray: ["50 160 70 30", "25 60 110 50", "20 270 30 30"],
+              rotate: [0, 360],
             }}
             transition={{
-              duration: 6,
+              duration: 25,
               repeat: Infinity,
-              repeatType: "reverse",
+              ease: "linear",
             }}
           />
         </motion.svg>
       </motion.div>
     </div>
   );
-};
-
-export default Photo;
+}

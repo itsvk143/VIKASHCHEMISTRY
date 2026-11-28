@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Camera, Users } from "lucide-react";
+import { Camera, Sparkles } from "lucide-react";
 
 const galleryImages = [
   {
@@ -39,18 +39,18 @@ const galleryImages = [
 
 export default function ClassroomGallerySection() {
   return (
-    <section className="py-20 bg-black/50 border-t border-white/5 relative">
+    <section className="py-20 lg:py-24 bg-navy-950 border-t border-white/5 relative">
       <div className="container mx-auto px-4 sm:px-6">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-wider mb-3">
-            <Camera className="w-4 h-4" /> Classroom In Action
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-600/15 border border-royal-500/30 text-royal-300 text-xs font-semibold uppercase tracking-wider mb-4">
+            <Camera className="w-3.5 h-3.5 text-gold-400" /> Authentic Teaching In Action
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
-            Experience the <span className="text-accent">Live Learning Energy</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white mb-4">
+            Live Classroom <span className="text-gradient-gold">Moments</span>
           </h2>
-          <p className="text-white/70 text-base sm:text-lg">
+          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
             Real classrooms, real equations, real students. See how Vikash Sir brings Chemistry concepts alive in every lecture.
           </p>
         </div>
@@ -63,8 +63,8 @@ export default function ClassroomGallerySection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden border border-white/10 hover:border-accent/40 bg-white/[0.02] transition-all shadow-xl aspect-[4/3]"
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="group relative rounded-2xl overflow-hidden border border-white/10 hover:border-royal-400/50 bg-navy-900 transition-all shadow-xl aspect-[4/3]"
             >
               <Image
                 src={item.src}
@@ -75,14 +75,14 @@ export default function ClassroomGallerySection() {
               />
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity flex flex-col justify-end p-5">
-                <span className="text-xs uppercase tracking-wider text-accent font-semibold mb-1">
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-5">
+                <span className="text-xs uppercase tracking-wider text-gold-400 font-bold mb-1">
                   Classroom Moment #{index + 1}
                 </span>
-                <h3 className="text-base sm:text-lg font-bold text-white mb-1">
+                <h3 className="text-base sm:text-lg font-heading font-bold text-white mb-1">
                   {item.title}
                 </h3>
-                <p className="text-xs text-white/75 line-clamp-2">
+                <p className="text-xs text-slate-300 line-clamp-2">
                   {item.caption}
                 </p>
               </div>
