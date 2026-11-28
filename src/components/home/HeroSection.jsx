@@ -47,9 +47,9 @@ export default function HeroSection() {
               <span className="text-xs sm:text-sm uppercase tracking-widest text-slate-400 font-bold block">
                 Kota&apos;s Veteran Chemistry Educator
               </span>
-              <h1 className="text-3xl sm:text-5xl xl:text-6xl font-heading font-black tracking-tight leading-[1.12] text-white">
-                Master <span className="text-royal-400">JEE &amp; NEET</span> Chemistry with{" "}
-                <span className="text-gradient-gold">Vikash Kumar (CVK Sir)</span>
+              <h1 className="text-3xl sm:text-5xl xl:text-6xl font-heading font-black tracking-tight leading-[1.15] text-white">
+                Master <span className="text-royal-400">JEE &amp; NEET</span> Chemistry with <br />
+                <span className="text-gradient-gold inline-block">Vikash Kumar (CVK Sir)</span>
               </h1>
             </div>
 
